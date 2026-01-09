@@ -1,0 +1,124 @@
+[
+    {
+        "id": "m1",
+        "title": "The Shawshank Redemption",
+        "overview": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+        "posterImage": "shawshank_poster",
+        "backdropImage": "shawshank_backdrop",
+        "rating": 9.3,
+        "releaseDate": 1994,
+        "genre": ["Drama"],
+        "viewCount": 2500000,
+        "director": "Frank Darabont"
+    },
+    {
+        "id": "m2",
+        "title": "The Godfather",
+        "overview": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+        "posterImage": "godfather_poster",
+        "backdropImage": "godfather_backdrop",
+        "rating": 9.2,
+        "releaseDate": 1972,
+        "genre": ["Crime", "Drama"],
+        "viewCount": 1800000,
+        "director": "Francis Ford Coppola"
+    },
+    {
+        "id": "m3",
+        "title": "The Dark Knight",
+        "overview": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+        "posterImage": "dark_knight_poster",
+        "backdropImage": "dark_knight_backdrop",
+        "rating": 9.0,
+        "releaseDate": 2008,
+        "genre": ["Action", "Crime", "Drama"],
+        "viewCount": 2100000,
+        "director": "Christopher Nolan"
+    },
+    {
+        "id": "m4",
+        "title": "The Godfather Part II",
+        "overview": "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.",
+        "posterImage": "godfather2_poster",
+        "backdropImage": "godfather2_backdrop",
+        "rating": 9.0,
+        "releaseDate": 1974,
+        "genre": ["Crime", "Drama"],
+        "viewCount": 1500000,
+        "director": "Francis Ford Coppola"
+    },
+    {
+        "id": "m5",
+        "title": "12 Angry Men",
+        "overview": "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.",
+        "posterImage": "12_angry_men_poster",
+        "backdropImage": "12_angry_men_backdrop",
+        "rating": 9.0,
+        "releaseDate": 1957,
+        "genre": ["Crime", "Drama"],
+        "viewCount": 900000,
+        "director": "Sidney Lumet"
+    },
+    {
+        "id": "m6",
+        "title": "Schindler's List",
+        "overview": "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.",
+        "posterImage": "schindlers_list_poster",
+        "backdropImage": "schindlers_list_backdrop",
+        "rating": 9.0,
+        "releaseDate": 1993,
+        "genre": ["Biography", "Drama", "History"],
+        "viewCount": 1200000,
+        "director": "Steven Spielberg"
+    },
+    {
+        "id": "m7",
+        "title": "The Lord of the Rings: The Return of the King",
+        "overview": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
+        "posterImage": "lotr_return_poster",
+        "backdropImage": "lotr_return_backdrop",
+        "rating": 9.0,
+        "releaseDate": 2003,
+        "genre": ["Action", "Adventure", "Drama"],
+        "viewCount": 2300000,
+        "director": "Peter Jackson"
+    },
+    {
+        "id": "m8",
+        "title": "Pulp Fiction",
+        "overview": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+        "posterImage": "pulp_fiction_poster",
+        "backdropImage": "pulp_fiction_backdrop",
+        "rating": 8.9,
+        "releaseDate": 1994,
+        "genre": ["Crime", "Drama"],
+        "viewCount": 1950000,
+        "director": "Quentin Tarantino"
+    },
+    {
+        "id": "m9",
+        "title": "The Lord of the Rings: The Fellowship of the Ring",
+        "overview": "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
+        "posterImage": "lotr_fellowship_poster",
+        "backdropImage": "lotr_fellowship_backdrop",
+        "rating": 8.8,
+        "releaseDate": 2001,
+        "genre": ["Action", "Adventure", "Drama"],
+        "viewCount": 2200000,
+        "director": "Peter Jackson"
+    },
+    {
+        "id": "m10",
+        "title": "The Good, the Bad and the Ugly",
+        "overview": "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.",
+        "posterImage": "good_bad_ugly_poster",
+        "backdropImage": "good_bad_ugly_backdrop",
+        "rating": 8.8,
+        "releaseDate": 1966,
+        "genre": ["Adventure", "Western"],
+        "viewCount": 950000,
+        "director": "Sergio Leone"
+    },
+    
+    
+]
