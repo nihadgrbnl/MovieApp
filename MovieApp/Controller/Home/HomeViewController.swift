@@ -9,86 +9,157 @@ import UIKit
 import SwiftUI
 
 class HomeViewController: UIViewController {
-
+    
+    
     @IBOutlet weak var collection: UICollectionView!
     
     private let viewModel = HomeViewModel()
     
-    let manager = MovieService.shared
-    var movieItems = [MovieModel]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
+        setUpCollectionView()
         configureData()
+        viewModel.fetchData()
     }
     
-    private func configureUI() {
+    private func setUpCollectionView() {
+        collection.collectionViewLayout = createLayout()
+        
         collection.delegate = self
         collection.dataSource = self
-        collection.register(UINib(nibName: "HomeHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeHeader")
-        collection.register(UINib(nibName: "MovieGridCell", bundle: nil), forCellWithReuseIdentifier: "MovieGridCell")
-        collection.backgroundColor = .appMainBackground
         
+        collection.register(UINib(nibName: "TrendingMovieCell", bundle: nil), forCellWithReuseIdentifier: "TrendingMovieCell")
+        collection.register(UINib(nibName: "CategoryCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCell")
+        collection.register(UINib(nibName: "MovieGridCell", bundle: nil), forCellWithReuseIdentifier: "MovieGridCell")
     }
     
     private func configureData() {
-            viewModel.onDataUpdated = { [weak self] in
-                DispatchQueue.main.async {
-                    print(" Film count: \(self?.viewModel.gridMovies.count ?? 0)") 
-                    self?.collection.reloadData()
-                }
+        viewModel.onDataUpdated = { [weak self] in
+            DispatchQueue.main.async {
+                print(" Film count: \(self?.viewModel.gridMovies.count ?? 0)")
+                self?.collection.reloadData()
             }
-            viewModel.fetchData()
         }
+        viewModel.fetchData()
+    }
     
-
+    private func createLayout() -> UICollectionViewLayout{
+        return UICollectionViewCompositionalLayout {(sectionIndex, env) -> NSCollectionLayoutSection? in
+            
+            if sectionIndex == 0 {
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(250))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .groupPaging
+                section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 15, bottom: 20, trailing: 15)
+                return section
+            } else if sectionIndex == 1 {
+                
+                let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .absolute(40))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .continuous
+                section.interGroupSpacing = 15
+                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 20, trailing: 20)
+                return section
+            } else {
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33), heightDimension: .absolute(170))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(170))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item, item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                return section
+            }
+            
+            
+        }
+    }
+    
 }
 
-extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
- 
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.gridMovies.count
+        switch section {
+        case 0: return viewModel.trendingMovies.count
+        case 1: return viewModel.categories.count
+        case 2: return viewModel.gridMovies.count
+        default: return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
-            let movie = viewModel.gridMovies[indexPath.item]
-            cell.layer.cornerRadius = 20
-
-            cell.configure(movie: movie)
-            return cell
+            switch indexPath.section {
+            case 0:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingMovieCell", for: indexPath) as! TrendingMovieCell
+                let movie = viewModel.trendingMovies[indexPath.item]
+                cell.configure(movie: movie, rank: indexPath.item + 1)
+                return cell
+                
+            case 1:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
+                let categoryTitle = viewModel.categories[indexPath.item]
+                let isSelected = (indexPath.item == viewModel.selectedCategoryIndex)
+                cell.configure(title: categoryTitle, isSelected: isSelected)
+                return cell
+                
+            default:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
+                let movie = viewModel.gridMovies[indexPath.item]
+                cell.configure(movie: movie)
+                return cell
+            }
+        }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        var selectedMovie : MovieModel?
+        
+        if indexPath.section == 0 {
+            selectedMovie = viewModel.trendingMovies[indexPath.item]
         }
         
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let totalWidth = collectionView.frame.width
-            
-            let padding : CGFloat = 60
-            let cellwidth = (totalWidth - padding) / 3
-            return CGSize(width: cellwidth, height: cellwidth * 1.5)
+        if indexPath.section == 1 {
+            viewModel.selectedCategory(at: indexPath.item)
+            collectionView.reloadSections([1, 2])
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
         
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets(top: 100, left: 10, bottom: 10, right: 10)
+        if indexPath.section == 2 {
+            selectedMovie = viewModel.gridMovies[indexPath.item]
         }
-    
-       func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-           let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeHeader", for: indexPath) as! HomeHeader
-           header.configure(movies: viewModel.trendingMovies)
-           return header
-       }
-       
-       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-           .init(width: 144, height: 210)
-       }
-    
-    
-    
+        
+        if let movie = selectedMovie {
+            print("Selected movie : \(movie.title ?? "Undefined")")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let detailController = storyboard.instantiateViewController(withIdentifier: "DetailController") as? DetailController {
+                detailController.movie = movie
+                navigationController?.show(detailController, sender: nil)
+            }
+        }
+    }
 }
 
 #Preview {
+    // Storyboard'dan yüklemezsen ekran simsiyah çıkar, o yüzden ID ile çekiyoruz
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     return storyboard.instantiateViewController(withIdentifier: "HomeViewController")
 }
+

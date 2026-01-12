@@ -24,9 +24,6 @@ class TrendingMovieCell: UICollectionViewCell {
         self.contentView.clipsToBounds = false
         rankLabel.clipsToBounds = false
         self.contentView.bringSubviewToFront(rankLabel)
-        
-        rankLabel.backgroundColor = .red
-        rankLabel.collisionBoundingPath.stroke()
     }
     
     func configure(movie: MovieModel, rank: Int) {

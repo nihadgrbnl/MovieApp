@@ -25,28 +25,21 @@ class RegisterViewController: UIViewController {
     }
     
     func configureUI () {
-        //Placeholder color change: Login
         signUpUsername.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
-        
-        //Placeholder color change: Email
-        signUpEmail.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
-        
-        //Placeholder color change: Login
-        signUpPassword.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
-        
         signUpUsername.layer.cornerRadius = 12
         signUpUsername.layer.masksToBounds = true
         
+        signUpEmail.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
         signUpEmail.layer.cornerRadius = 12
         signUpEmail.layer.masksToBounds = true
         
+        signUpPassword.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
         signUpPassword.layer.cornerRadius = 12
         signUpPassword.layer.masksToBounds = true
-        
+
         signUpBtn.layer.cornerRadius = 12
         signUpBtn.layer.masksToBounds = true
         
-        //Padding:Login
         let freeSpaceUsername = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 10))
         signUpUsername.leftView = freeSpaceUsername
         signUpUsername.leftViewMode = .always
