@@ -18,4 +18,5 @@ struct MovieModel : Codable {
     let genre : [String]?
     let viewCount : Int?
     let director : String?
+    let runtime : Int?
 }

@@ -9,7 +9,8 @@
         "releaseDate": 1994,
         "genre": ["Drama"],
         "viewCount": 2500000,
-        "director": "Frank Darabont"
+        "director": "Frank Darabont",
+        "runtime": 142
     },
     {
         "id": "m2",
@@ -21,7 +22,8 @@
         "releaseDate": 1972,
         "genre": ["Crime", "Drama"],
         "viewCount": 1800000,
-        "director": "Francis Ford Coppola"
+        "director": "Francis Ford Coppola",
+        "runtime": 175
     },
     {
         "id": "m3",
@@ -33,7 +35,8 @@
         "releaseDate": 2008,
         "genre": ["Action", "Crime", "Drama"],
         "viewCount": 2100000,
-        "director": "Christopher Nolan"
+        "director": "Christopher Nolan",
+        "runtime": 152
     },
     {
         "id": "m4",
@@ -45,7 +48,8 @@
         "releaseDate": 1974,
         "genre": ["Crime", "Drama"],
         "viewCount": 1500000,
-        "director": "Francis Ford Coppola"
+        "director": "Francis Ford Coppola",
+        "runtime": 202
     },
     {
         "id": "m5",
@@ -57,7 +61,8 @@
         "releaseDate": 1957,
         "genre": ["Crime", "Drama"],
         "viewCount": 900000,
-        "director": "Sidney Lumet"
+        "director": "Sidney Lumet",
+        "runtime": 96
     },
     {
         "id": "m6",
@@ -69,7 +74,8 @@
         "releaseDate": 1993,
         "genre": ["Biography", "Drama", "History"],
         "viewCount": 1200000,
-        "director": "Steven Spielberg"
+        "director": "Steven Spielberg",
+        "runtime": 195
     },
     {
         "id": "m7",
@@ -81,7 +87,8 @@
         "releaseDate": 2003,
         "genre": ["Action", "Adventure", "Drama"],
         "viewCount": 2300000,
-        "director": "Peter Jackson"
+        "director": "Peter Jackson",
+        "runtime": 201
     },
     {
         "id": "m8",
@@ -93,7 +100,8 @@
         "releaseDate": 1994,
         "genre": ["Crime", "Drama"],
         "viewCount": 1950000,
-        "director": "Quentin Tarantino"
+        "director": "Quentin Tarantino",
+        "runtime": 154
     },
     {
         "id": "m9",
@@ -105,7 +113,8 @@
         "releaseDate": 2001,
         "genre": ["Action", "Adventure", "Drama"],
         "viewCount": 2200000,
-        "director": "Peter Jackson"
+        "director": "Peter Jackson",
+        "runtime": 178
     },
     {
         "id": "m10",
@@ -117,10 +126,7 @@
         "releaseDate": 1966,
         "genre": ["Adventure", "Western"],
         "viewCount": 950000,
-        "director": "Sergio Leone"
-    },
-    
-    
-    
-    
+        "director": "Sergio Leone",
+        "runtime": 161
+    }
 ]

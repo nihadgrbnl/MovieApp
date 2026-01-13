@@ -15,8 +15,8 @@ class DetailController: UIViewController {
     
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var runtimeLabel: UILabel!
-    @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
+//    @IBOutlet weak var directorLabel: UILabel!
     
     var movie : MovieModel?
     
@@ -33,9 +33,20 @@ class DetailController: UIViewController {
         titleLabel.text = movie.title
         overviewLabel.text = movie.overview
         
+//        if let director = movie.director {
+//            directorLabel.text = "Directed by: \(director)"
+//        }
+        
+        
         if let date = movie.releaseDate {
             releaseDateLabel.text = "\(date)"
         }
+        
+        if let runtime = movie.runtime {
+            runtimeLabel.text = "\(runtime) minute"
+        }
+        
+        
         
         if let backdropPath = movie.backdropImage {
             backdropImage.image = UIImage(named: backdropPath)
@@ -47,7 +58,6 @@ class DetailController: UIViewController {
         
         posterImage.layer.cornerRadius = 12
         posterImage.clipsToBounds = true
-        
         backdropImage.contentMode = .scaleAspectFill
     }
     
