@@ -27,15 +27,14 @@ class SearchViewController: UIViewController {
     private func setupUI() {
         collection.delegate = self
         collection.dataSource = self
-        collection.register(UINib(nibName: "MovieGridCell", bundle: nil), forCellWithReuseIdentifier: "MovieGridCell")
+        collection.register(UINib(nibName: "SearchListCell", bundle: nil), forCellWithReuseIdentifier: "SearchListCell")
 
         
         searchBar.delegate = self
         searchBar.placeholder = "Search Movie..."
         
         let layout = UICollectionViewFlowLayout()
-        let width = (view.frame.width - 40) / 3
-        layout.itemSize = CGSize(width: width, height: width * 1.5)
+        layout.itemSize = CGSize(width: view.frame.width - 20, height: 170)
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         collection.collectionViewLayout = layout
         
@@ -67,7 +66,7 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchListCell", for: indexPath) as! SearchListCell
         
         let movie = filteredMovies[indexPath.item]
         cell.configure(movie: movie)
