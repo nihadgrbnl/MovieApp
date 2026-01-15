@@ -31,10 +31,10 @@ class LoginViewController: UIViewController {
         //Placeholder color change: Login
         passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
         
-        usernameTextField.layer.cornerRadius = 12
+//        usernameTextField.layer.cornerRadius = 12
         usernameTextField.layer.masksToBounds = true
         
-        passwordTextField.layer.cornerRadius = 12
+//        passwordTextField.layer.cornerRadius = 12
         passwordTextField.layer.masksToBounds = true
         
         loginBtn.layer.cornerRadius = 12

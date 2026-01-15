@@ -26,15 +26,15 @@ class RegisterViewController: UIViewController {
     
     func configureUI () {
         signUpUsername.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
-        signUpUsername.layer.cornerRadius = 12
+//        signUpUsername.layer.cornerRadius = 12
         signUpUsername.layer.masksToBounds = true
         
         signUpEmail.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
-        signUpEmail.layer.cornerRadius = 12
+//        signUpEmail.layer.cornerRadius = 12
         signUpEmail.layer.masksToBounds = true
         
         signUpPassword.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
-        signUpPassword.layer.cornerRadius = 12
+//        signUpPassword.layer.cornerRadius = 12
         signUpPassword.layer.masksToBounds = true
 
         signUpBtn.layer.cornerRadius = 12
