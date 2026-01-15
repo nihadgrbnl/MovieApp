@@ -26,8 +26,10 @@ class SearchListCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        posterImage.layer.cornerRadius = 25
-        posterImage.clipsToBounds = true
+        posterImage.layer.cornerRadius = 12
+        posterImage.contentMode = .scaleAspectFill
+//        posterImage.clipsToBounds = true
+        posterImage.layer.masksToBounds = true
         
         
     }

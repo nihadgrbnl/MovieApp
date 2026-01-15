@@ -29,18 +29,22 @@ class TrendingMovieCell: UICollectionViewCell {
     func configure(movie: MovieModel, rank: Int) {
         posterImage.image = UIImage(named: movie.posterImage!)
         
-        let rankString = String(rank)
-        
         let strokeTextAttributes: [NSAttributedString.Key : Any] = [
-                    .strokeColor : UIColor.systemBlue, 
-                    .foregroundColor : UIColor.black.withAlphaComponent(0.5),
-                    .strokeWidth : -4.0,
-                    .font : UIFont.systemFont(ofSize: 100, weight: .heavy)
+            .strokeColor : UIColor.clear,
+            .foregroundColor : UIColor.onBoardBtn.withAlphaComponent(0.9),
+                    .strokeWidth : -2.0,
+            .font : UIFont.italicSystemFont(ofSize: 90)
                 ]
+        rankLabel.layer.shadowColor = UIColor.black.cgColor
+                rankLabel.layer.shadowRadius = 1.0
+                rankLabel.layer.shadowOpacity = 1.0
+                rankLabel.layer.shadowOffset = CGSize(width: 4, height: 4)
+                rankLabel.layer.masksToBounds = false
         
+        let rankString = String(rank)
         rankLabel.attributedText = NSAttributedString(string: rankString, attributes: strokeTextAttributes)
         
         
     }
-
+    
 }

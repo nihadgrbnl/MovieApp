@@ -34,7 +34,7 @@ class SearchViewController: UIViewController {
         searchBar.placeholder = "Search Movie..."
         
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.frame.width - 20, height: 170)
+        layout.itemSize = CGSize(width: view.frame.width - 20, height: 190)
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         collection.collectionViewLayout = layout
         

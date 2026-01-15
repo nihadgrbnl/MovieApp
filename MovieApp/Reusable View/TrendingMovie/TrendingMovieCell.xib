@@ -19,8 +19,8 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D9x-JE-gtI">
                         <rect key="frame" x="0.0" y="0.0" width="159" height="181"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzi-eO-8TG">
-                        <rect key="frame" x="-20" y="91" width="230" height="120"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzi-eO-8TG">
+                        <rect key="frame" x="-39" y="133" width="80" height="80"/>
                         <fontDescription key="fontDescription" type="system" pointSize="100"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -29,9 +29,9 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="zzi-eO-8TG" secondAttribute="bottom" constant="-30" id="4fH-pb-0Nd"/>
+                <constraint firstAttribute="bottom" secondItem="zzi-eO-8TG" secondAttribute="bottom" constant="-32" id="CXe-Eg-dz7"/>
                 <constraint firstItem="D9x-JE-gtI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="FfV-Tl-1QM"/>
-                <constraint firstItem="zzi-eO-8TG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="-20" id="Hj6-9C-60F"/>
+                <constraint firstItem="zzi-eO-8TG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="-20" id="GdR-j1-udk"/>
                 <constraint firstAttribute="bottom" secondItem="D9x-JE-gtI" secondAttribute="bottom" id="JZx-eR-QnH"/>
                 <constraint firstAttribute="trailing" secondItem="D9x-JE-gtI" secondAttribute="trailing" id="TJS-K5-r2h"/>
                 <constraint firstItem="D9x-JE-gtI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="pUi-l2-bil"/>

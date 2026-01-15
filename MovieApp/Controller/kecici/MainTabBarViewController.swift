@@ -35,14 +35,8 @@ class MainTabBarViewController: UITabBarController {
                                 tag: 2)
         let watchListNavigation = UINavigationController(rootViewController: watchList)
         
-        let profile = storyboard?.instantiateViewController(withIdentifier: "\(ProfileViewController.self)") as! ProfileViewController
-        profile.tabBarItem = .init(title: "Home",
-                                image: UIImage(systemName: "person.crop.circle"),
-                                tag: 3)
-        let profileNavigation = UINavigationController(rootViewController: profile)
-        
         self.tabBar.backgroundColor = .appMainBackground
-        viewControllers = [homeNavigation, searchNavigation, watchListNavigation, profileNavigation]
+        viewControllers = [homeNavigation, searchNavigation, watchListNavigation,]
         
         
     }

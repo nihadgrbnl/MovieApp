@@ -24,27 +24,27 @@
                         <rect key="frame" x="142" y="10" width="198" height="130"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kt-0v-Y6l" userLabel="titleLabel">
-                                <rect key="frame" x="0.0" y="0.0" width="198" height="35.333333333333336"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <rect key="frame" x="0.0" y="0.0" width="198" height="36.333333333333336"/>
+                                <fontDescription key="fontDescription" name="NotoSansSyriac-Regular" family="Noto Sans Syriac" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCb-Ey-uLe" userLabel="genreLabel">
-                                <rect key="frame" x="0.0" y="40.333333333333336" width="198" height="23.333333333333336"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="41.333333333333336" width="198" height="24.333333333333336"/>
+                                <fontDescription key="fontDescription" name="NotoSansSyriac-Regular" family="Noto Sans Syriac" pointSize="12"/>
+                                <color key="textColor" name="placeHolderColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4MU-ko-wG7" userLabel="releaseDateLabel">
-                                <rect key="frame" x="0.0" y="68.666666666666671" width="198" height="23.333333333333329"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="70.666666666666671" width="198" height="24"/>
+                                <fontDescription key="fontDescription" name="NotoSansSyriac-Regular" family="Noto Sans Syriac" pointSize="12"/>
+                                <color key="textColor" name="placeHolderColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RnC-dK-yua" userLabel="runtimeLabel">
-                                <rect key="frame" x="0.0" y="97" width="198" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="99.666666666666671" width="198" height="30.333333333333329"/>
+                                <fontDescription key="fontDescription" name="NotoSansSyriac-Regular" family="Noto Sans Syriac" pointSize="12"/>
+                                <color key="textColor" name="placeHolderColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -60,6 +60,7 @@
                 <constraint firstAttribute="bottom" secondItem="7X9-3V-8Jf" secondAttribute="bottom" constant="10" id="QNK-Uq-aF2"/>
                 <constraint firstItem="nPr-os-wO7" firstAttribute="leading" secondItem="7X9-3V-8Jf" secondAttribute="trailing" constant="15" id="TQN-qv-U96"/>
                 <constraint firstAttribute="bottom" secondItem="nPr-os-wO7" secondAttribute="bottom" constant="10" id="hdz-eh-Egf"/>
+                <constraint firstItem="7X9-3V-8Jf" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.866667" id="lXP-uv-kjC"/>
                 <constraint firstItem="7X9-3V-8Jf" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.325714" id="nS6-cW-SQM"/>
                 <constraint firstItem="7X9-3V-8Jf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="tbU-hy-SJ5"/>
             </constraints>
@@ -76,6 +77,9 @@
     <resources>
         <namedColor name="cardColor">
             <color red="0.26666666666666666" green="0.33333333333333331" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="placeHolderColor">
+            <color red="0.53333333333333333" green="0.59999999999999998" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

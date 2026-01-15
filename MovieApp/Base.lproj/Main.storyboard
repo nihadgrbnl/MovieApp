@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -428,22 +427,6 @@ Tell your friends what’s good.”</string>
             <point key="canvasLocation" x="4502" y="520"/>
         </scene>
         <!--Item-->
-        <scene sceneID="pyU-3F-LOw">
-            <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="jZb-eo-h0p" customClass="ProfileViewController" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1YB-4V-XZG">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="EAY-KK-UQy"/>
-                        <color key="backgroundColor" systemColor="systemPinkColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="person.crop.circle" catalog="system" id="i9g-Xu-VAH"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ic1-6z-EDa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4502" y="1225"/>
-        </scene>
-        <!--Item-->
         <scene sceneID="Rfc-SY-ZYo">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="r7D-mU-ESc" customClass="HomeViewController" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -672,7 +655,6 @@ Tell your friends what’s good.”</string>
                         <segue destination="TtY-xI-dHB" kind="relationship" relationship="viewControllers" id="xkM-Ie-UJs"/>
                         <segue destination="HdJ-SR-jaA" kind="relationship" relationship="viewControllers" id="YWm-Ds-9Yj"/>
                         <segue destination="r7D-mU-ESc" kind="relationship" relationship="viewControllers" id="2hR-sb-ZXx"/>
-                        <segue destination="jZb-eo-h0p" kind="relationship" relationship="viewControllers" id="OOb-We-iHv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGa-qU-VbL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -687,7 +669,6 @@ Tell your friends what’s good.”</string>
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="loginTest1" width="1920" height="1080"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
-        <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="registerBanner" width="1920" height="1080"/>
         <namedColor name="AppMainBackgroundColor">
             <color red="0.14117647058823529" green="0.16470588235294117" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -707,8 +688,5 @@ Tell your friends what’s good.”</string>
         <namedColor name="placeHolderColor">
             <color red="0.53333333333333333" green="0.59999999999999998" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

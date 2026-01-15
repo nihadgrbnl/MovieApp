@@ -13,7 +13,7 @@ class CategoryCell: UICollectionViewCell {
     
     private let lineView: UIView = {
             let view = UIView()
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .orangeLetterboxd
             view.translatesAutoresizingMaskIntoConstraints = false
             view.isHidden = true
             return view
@@ -28,8 +28,8 @@ class CategoryCell: UICollectionViewCell {
                 NSLayoutConstraint.activate([
                     lineView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
                     lineView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-                    lineView.widthAnchor.constraint(equalToConstant: 20),
-                    lineView.heightAnchor.constraint(equalToConstant: 3)
+                    lineView.widthAnchor.constraint(equalToConstant: 100),
+                    lineView.heightAnchor.constraint(equalToConstant: 2)
                 ])
     }
     
