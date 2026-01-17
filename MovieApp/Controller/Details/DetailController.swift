@@ -70,30 +70,24 @@ class DetailController: UIViewController {
     
     private func updateBookmarkIcon() {
         guard let movie = movie else { return }
-        
         let isSaved = CoreDataManager.shared.isMovieSaved(movieID: movie.id ?? "")
-        
         let iconName = isSaved ? "bookmark.fill" : "bookmark"
-        
         let bookmarkButton = UIBarButtonItem(
             image: UIImage(systemName: iconName),
             style: .plain,
             target: self,
             action: #selector(bookmarkTapped)
         )
-        
         navigationItem.rightBarButtonItem = bookmarkButton
     }
     
     @objc func bookmarkTapped () {
         guard let movie = movie else { return }
-        
         if CoreDataManager.shared.isMovieSaved(movieID: movie.id ?? "") {
             CoreDataManager.shared.deleteMovie(movieID: movie.id ?? "")
         } else {
             CoreDataManager.shared.saveMovie(movie: movie)
         }
-        
         updateBookmarkIcon()
         
         

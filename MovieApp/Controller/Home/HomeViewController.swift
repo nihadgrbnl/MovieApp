@@ -18,27 +18,55 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Movie Night"
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationItem.largeTitleDisplayMode = .never
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .clear
-        
-        appearance.titleTextAttributes = [
-            .foregroundColor: UIColor.placeHolder,
-            .font: UIFont.systemFont(ofSize: 30, weight: .bold)
-        ]
-        
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        
         setUpCollectionView()
         configureData()
         viewModel.fetchData()
+        configureUI()
+        
+        
     }
+    
+    private func configureUI () {
+        navigationItem.hidesBackButton = true
+        setupLogoutButton()
+        title = "Letterboxd"
+
+        navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    private func setupLogoutButton() {
+        let logoutBtn = UIBarButtonItem(
+            image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
+            style: .plain,
+            target: self,
+            action: #selector(logoutTapped)
+        )
+        logoutBtn.tintColor = .orangeLetterboxd
+        navigationItem.rightBarButtonItem = logoutBtn
+    }
+    
+    @objc func logoutTapped() {
+        let alert = UIAlertController(title: "Exit", message: "Are you sure to exit", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Exit", style: .destructive) { _ in
+            UserDefaults.standard.set(false, forKey: "isLoggedIn")
+            self.navigateToLogin()
+        })
+        present(alert, animated: true)
+    }
+    
+    private func navigateToLogin() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        
+        if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate,
+           let window = sceneDelegate.window {
+            
+            window.rootViewController = loginController
+            
+        }
+    }
+    
     
     private func setUpCollectionView() {
         collection.collectionViewLayout = createLayout()
@@ -60,50 +88,50 @@ class HomeViewController: UIViewController {
         }
         viewModel.fetchData()
     }
-        
+    
     private func createLayout() -> UICollectionViewLayout {
-            return UICollectionViewCompositionalLayout { (sectionIndex, env) -> NSCollectionLayoutSection? in
+        return UICollectionViewCompositionalLayout { (sectionIndex, env) -> NSCollectionLayoutSection? in
+            
+            switch sectionIndex {
+            case 0:
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
                 
-                switch sectionIndex {
-                case 0:
-                    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1.0))
-                    let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                    item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
-                    
-                    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(250))
-                    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                    
-                    let section = NSCollectionLayoutSection(group: group)
-                    section.orthogonalScrollingBehavior = .groupPaging
-                    section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 15, bottom: 20, trailing: 15)
-                    return section
-                    
-                case 1:
-                    let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .fractionalHeight(1.0))
-                    let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                    
-                    let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .absolute(40))
-                    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                    
-                    let section = NSCollectionLayoutSection(group: group)
-                    section.orthogonalScrollingBehavior = .continuous
-                    section.interGroupSpacing = 15
-                    section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 20, trailing: 20)
-                    return section
-                    
-                default:
-                    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33), heightDimension: .absolute(170))
-                    let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                    item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-                    
-                    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(170))
-                    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
-                    let section = NSCollectionLayoutSection(group: group)
-                    section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
-                    return section
-                }
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(250))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .groupPaging
+                section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 15, bottom: 20, trailing: 15)
+                return section
+                
+            case 1:
+                let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .absolute(40))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .continuous
+                section.interGroupSpacing = 15
+                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 20, trailing: 20)
+                return section
+                
+            default:
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33), heightDimension: .absolute(170))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(170))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                return section
             }
         }
+    }
     
 }
 
@@ -122,27 +150,27 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            switch indexPath.section {
-            case 0:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingMovieCell", for: indexPath) as! TrendingMovieCell
-                let movie = viewModel.trendingMovies[indexPath.item]
-                cell.configure(movie: movie, rank: indexPath.item + 1)
-                return cell
-                
-            case 1:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
-                let categoryTitle = viewModel.categories[indexPath.item]
-                let isSelected = (indexPath.item == viewModel.selectedCategoryIndex)
-                cell.configure(title: categoryTitle, isSelected: isSelected)
-                return cell
-                
-            default:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
-                let movie = viewModel.gridMovies[indexPath.item]
-                cell.configure(movie: movie)
-                return cell
-            }
+        switch indexPath.section {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrendingMovieCell", for: indexPath) as! TrendingMovieCell
+            let movie = viewModel.trendingMovies[indexPath.item]
+            cell.configure(movie: movie, rank: indexPath.item + 1)
+            return cell
+            
+        case 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
+            let categoryTitle = viewModel.categories[indexPath.item]
+            let isSelected = (indexPath.item == viewModel.selectedCategoryIndex)
+            cell.configure(title: categoryTitle, isSelected: isSelected)
+            return cell
+            
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
+            let movie = viewModel.gridMovies[indexPath.item]
+            cell.configure(movie: movie)
+            return cell
         }
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

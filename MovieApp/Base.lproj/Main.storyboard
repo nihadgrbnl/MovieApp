@@ -11,7 +11,7 @@
         <!--On Board Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="OnBoardController" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnBoardController" id="BYZ-38-t0r" customClass="OnBoardController" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,7 +124,7 @@ Tell your friends what’s good.”</string>
                                     <fontDescription key="titleFontDescription" name="NotoSansSyriac-Regular_Bold" family="Noto Sans Syriac" pointSize="13"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="loginBtnTapped:" destination="QCp-GL-6Ze" eventType="touchUpInside" id="xey-pY-Lyx"/>
+                                    <action selector="loginBtnTapped:" destination="QCp-GL-6Ze" eventType="touchUpInside" id="pPD-RR-CK0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kkr-1T-Zwl">
@@ -321,6 +321,7 @@ Tell your friends what’s good.”</string>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="signUpBtnTapped:" destination="QCp-GL-6Ze" eventType="touchUpInside" id="2R5-kv-30y"/>
+                                    <action selector="signUpBtnTapped:" destination="NfI-SF-YFe" eventType="touchUpInside" id="Dlm-cv-B4A"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="egk-72-fkU">
@@ -455,7 +456,9 @@ Tell your friends what’s good.”</string>
                             <constraint firstItem="s41-ky-1Yw" firstAttribute="leading" secondItem="ovD-Vg-16L" secondAttribute="leading" id="snj-na-HNb"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="homekit" catalog="system" id="7cd-ba-7Ml"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="house" catalog="system" id="7cd-ba-7Ml">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="0.0"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="collection" destination="s41-ky-1Yw" id="I3A-7z-pIT"/>
                     </connections>
@@ -494,13 +497,13 @@ Tell your friends what’s good.”</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNR-JO-Wf8">
                                         <rect key="frame" x="0.0" y="2.3333333333333144" width="140" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="placeHolderColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="148 Minutes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIu-nn-eKo">
                                         <rect key="frame" x="154" y="2.3333333333333144" width="139.66666666666663" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="placeHolderColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -509,10 +512,10 @@ Tell your friends what’s good.”</string>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZYn-Ry-1cf">
-                                <rect key="frame" x="20" y="451.66666666666669" width="353" height="54.333333333333314"/>
+                                <rect key="frame" x="20" y="451.66666666666669" width="353" height="34.333333333333314"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1O-2w-Tww">
-                                        <rect key="frame" x="0.0" y="0.0" width="117.66666666666667" height="54.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="34.333333333333336"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="About Movie">
@@ -522,32 +525,10 @@ Tell your friends what’s good.”</string>
                                             </backgroundConfiguration>
                                         </buttonConfiguration>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aes-ht-Q4g">
-                                        <rect key="frame" x="117.66666666666666" y="0.0" width="117.66666666666666" height="54.333333333333336"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Trailer">
-                                            <backgroundConfiguration key="background">
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="strokeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </backgroundConfiguration>
-                                        </buttonConfiguration>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1h2-ii-IYI">
-                                        <rect key="frame" x="235.33333333333334" y="0.0" width="117.66666666666666" height="54.333333333333336"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Cast">
-                                            <backgroundConfiguration key="background">
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="strokeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </backgroundConfiguration>
-                                        </buttonConfiguration>
-                                    </button>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LR-1Q-clP">
-                                <rect key="frame" x="20" y="520.66666666666663" width="353" height="61"/>
+                                <rect key="frame" x="20" y="500.66666666666674" width="353" height="61"/>
                                 <string key="text">A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -666,7 +647,7 @@ Tell your friends what’s good.”</string>
         <image name="LogoTest" width="158" height="75"/>
         <image name="OnBoardImage" width="375" height="437"/>
         <image name="bookmark" catalog="system" width="110" height="128"/>
-        <image name="homekit" catalog="system" width="128" height="104"/>
+        <image name="house" catalog="system" width="128" height="104"/>
         <image name="loginTest1" width="1920" height="1080"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="registerBanner" width="1920" height="1080"/>

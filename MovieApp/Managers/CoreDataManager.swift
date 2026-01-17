@@ -37,8 +37,9 @@ class CoreDataManager {
         entity.rating = movie.rating ?? 0
         entity.releaseDate = Int64(movie.releaseDate ?? 0)
         entity.runtime = Int64(movie.runtime ?? 0)
-        
         entity.genre = movie.genre?.joined(separator: ",")
+        entity.backdrop = movie.backdropImage
+        entity.overview = movie.overview
         
         saveContext()
         print("saved: \(movie.title)")
@@ -72,9 +73,9 @@ class CoreDataManager {
             for entity in entitites {
                 let model = MovieModel(id: entity.id,
                                        title: entity.title,
-                                       overview: "",
+                                       overview: entity.overview,
                                        posterImage: entity.posterImage,
-                                       backdropImage: "",
+                                       backdropImage: entity.backdrop,
                                        rating: entity.rating,
                                        releaseDate: Int(entity.releaseDate),
                                        genre: entity.genre?.components(separatedBy: ",") ?? [],

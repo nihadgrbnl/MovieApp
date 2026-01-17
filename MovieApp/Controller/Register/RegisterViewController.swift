@@ -18,25 +18,23 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
         loadDataFromFile()
-        
     }
     
     func configureUI () {
         signUpUsername.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
-//        signUpUsername.layer.cornerRadius = 12
+        //        signUpUsername.layer.cornerRadius = 12
         signUpUsername.layer.masksToBounds = true
         
         signUpEmail.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
-//        signUpEmail.layer.cornerRadius = 12
+        //        signUpEmail.layer.cornerRadius = 12
         signUpEmail.layer.masksToBounds = true
         
         signUpPassword.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeHolder])
-//        signUpPassword.layer.cornerRadius = 12
+        //        signUpPassword.layer.cornerRadius = 12
         signUpPassword.layer.masksToBounds = true
-
+        
         signUpBtn.layer.cornerRadius = 12
         signUpBtn.layer.masksToBounds = true
         
@@ -51,7 +49,6 @@ class RegisterViewController: UIViewController {
         let freeSpaceEmail = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 10))
         signUpEmail.leftView = freeSpaceEmail
         signUpEmail.leftViewMode = .always
-        
     }
     
     private func getFilePath() -> URL {
@@ -80,18 +77,45 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    func makeAlert(titleInput: String, messageInput: String) {
+        let alert = UIAlertController(title: titleInput, message: messageInput, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        alert.addAction(okButton)
+        self.present(alert, animated: true, completion: nil)
+    }
     
     @IBAction func signUpBtnTapped(_ sender: Any) {
-        guard let username = signUpUsername.text,
-              let email = signUpEmail.text,
-              let password = signUpPassword.text
-        else { return }
+        let username = signUpUsername.text ?? ""
+        let email = signUpEmail.text ?? ""
+        let password = signUpPassword.text ?? ""
+        
+        if username.isEmpty {
+            makeAlert(titleInput: "Error", messageInput: "Please enter username.")
+            return
+        }
+        if email.isEmpty {
+            makeAlert(titleInput: "Error", messageInput: "Please enter Email.")
+            return
+        }
+        if password.isEmpty {
+            makeAlert(titleInput: "Error", messageInput: "Please enter password.")
+            return
+        }
+        if password.count < 6 {
+            makeAlert(titleInput: "Security alert", messageInput: "Password must be at least 6 character.")
+            return
+        }
         
         let user = User(username: username, email: email, password: password)
         users.append(user)
         saveDataToFile()
         
-        self.dismiss(animated: true)
+        let successAlert = UIAlertController(title: "Success", message: "Registration created", preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.dismiss(animated: true)
+        }
+        
+        successAlert.addAction(okButton)
+        self.present(successAlert, animated: true)
     }
-    
 }

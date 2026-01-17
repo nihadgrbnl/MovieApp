@@ -25,6 +25,8 @@ extension MovieEntity {
     @NSManaged public var releaseDate: Int64
     @NSManaged public var runtime: Int64
     @NSManaged public var genre: String?
+    @NSManaged public var backdrop: String?
+    @NSManaged public var overview: String?
 
 }
 

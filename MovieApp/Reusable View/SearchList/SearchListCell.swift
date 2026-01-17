@@ -30,8 +30,6 @@ class SearchListCell: UICollectionViewCell {
         posterImage.contentMode = .scaleAspectFill
 //        posterImage.clipsToBounds = true
         posterImage.layer.masksToBounds = true
-        
-        
     }
     
     func configure(movie : MovieModel) {
