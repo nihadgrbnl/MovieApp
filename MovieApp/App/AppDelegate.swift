@@ -17,11 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let movies = MovieService.shared.fetchMovies()
-        print(" Number of Films : \(movies.count)")
-        if let firstMovie = movies.first {
-            print("First Movie \(firstMovie.title)")
-        }
+//        let movies = MovieService.shared.fetchMovies()
+//        print(" Number of Films : \(movies.count)")
+//        if let firstMovie = movies.first {
+//            print("First Movie \(firstMovie.title)")
+//        }
         
         IQKeyboardManager.shared.isEnabled = true
             

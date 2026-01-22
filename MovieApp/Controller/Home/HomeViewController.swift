@@ -166,7 +166,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieGridCell", for: indexPath) as! MovieGridCell
-            let movie = viewModel.gridMovies[indexPath.item]
+            let movie = viewModel.getMovie(at: indexPath.item)
             cell.configure(movie: movie)
             return cell
         }
@@ -174,7 +174,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        var selectedMovie : MovieModel?
+        var selectedMovie : Movie?
         
         if indexPath.section == 0 {
             selectedMovie = viewModel.trendingMovies[indexPath.item]

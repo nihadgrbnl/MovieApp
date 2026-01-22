@@ -8,12 +8,12 @@
 import Foundation
 
 class HomeViewModel {
-    private var allMovies : [MovieModel] = []
+    private var movies : [Movie] = []
     
     
-    var trendingMovies : [MovieModel] = []
-    var categories : [String] = []
-    var gridMovies : [MovieModel] = []
+    var trendingMovies : [Movie] = []
+    var categories : [String] = ["All", "Action", "Comedy", "Drama", "Horror", "Sci-Fi"]
+    var gridMovies : [Movie] = []
     
     var selectedCategoryIndex : Int = 0
     
@@ -21,23 +21,41 @@ class HomeViewModel {
     
     func fetchData() {
         
-        self.allMovies = MovieService.shared.fetchMovies()
+        //        self.allMovies = MovieService.shared.fetchMovies()
         
-        self.trendingMovies = Array(allMovies.prefix(10))
-        
-        var uniqueGenres = Set<String>()
-        for movie in allMovies {
-            if let genres = movie.genre {
-                for genre in genres {
-                    uniqueGenres.insert(genre)
-                }
+        NetworkManager.shared.getTrendingMovies { [weak self] result in
+            switch result{
+            case .success(let moviesFromAPI):
+                self?.movies = moviesFromAPI
+                print("\(moviesFromAPI.count) films came from API")
+                self?.processMovies()
+                self?.onDataUpdated?()
+            case .failure(let error):
+                print(error.localizedDescription)
+                
             }
         }
-        self.categories = ["All"] + uniqueGenres.sorted()
         
-        self.gridMovies = allMovies
+        
+        
+        //        var uniqueGenres = Set<String>()
+        //        for movie in movies {
+        //            if let genres = movie.genre {
+        //                for genre in genres {
+        //                    uniqueGenres.insert(genre)
+        //                }
+        //            }
+        //        }
+        //        self.categories = ["All"] + uniqueGenres.sorted()
+        
+        
         
         self.onDataUpdated?()
+    }
+    
+    private func processMovies() {
+        self.trendingMovies = Array(movies.prefix(10))
+        self.gridMovies = movies
     }
     
     func selectedCategory(at index : Int) {
@@ -45,12 +63,24 @@ class HomeViewModel {
         let selectedTitle = categories[index]
         
         if selectedTitle == "All" {
-            gridMovies = allMovies
+            gridMovies = movies
         } else {
-            gridMovies = allMovies.filter{ movie in
-                return movie.genre?.contains(selectedTitle) ?? false
-            }
+            //            gridMovies = movies.filter{ movie in
+            //                return movie.genre?.contains(selectedTitle) ?? false
+            
+            gridMovies = movies
         }
         onDataUpdated?()
     }
+    
+    func getMovie(at index: Int) -> Movie {
+        if index < self.gridMovies.count {
+            return self.gridMovies[index]
+        }
+        return self.gridMovies[0]
+    }
+
+    
 }
+
+

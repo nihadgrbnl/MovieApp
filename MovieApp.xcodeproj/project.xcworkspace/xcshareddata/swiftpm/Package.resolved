@@ -1,5 +1,5 @@
 {
-  "originHash" : "74350aa352c5d591ca8d4f79af1d4ddfebb8db922d44b4aaadfe4515f1da67a9",
+  "originHash" : "25a4d2622e2191d80e2f2e53db3cbdc7aa7333febf84c7ad1962e302fe60650b",
   "pins" : [
     {
       "identity" : "iqkeyboardcore",
@@ -71,6 +71,15 @@
       "state" : {
         "revision" : "76f514eba5218bdf67659168ba227c77da5f75fe",
         "version" : "1.0.5"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "36e79ba485e9bb4d3cd4e3318908866dac5e7b51",
+        "version" : "5.21.5"
       }
     }
   ],

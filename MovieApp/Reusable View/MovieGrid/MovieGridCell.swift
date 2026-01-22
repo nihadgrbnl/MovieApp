@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MovieGridCell: UICollectionViewCell {
 
@@ -17,8 +18,11 @@ class MovieGridCell: UICollectionViewCell {
         gridPosterImage.clipsToBounds = true
     }
     
-    func configure(movie: MovieModel) {
-        gridPosterImage.image = UIImage(named: movie.posterImage!)
+    func configure(movie: Movie) {
+        if let path = movie.posterPath {
+            let fullURL = URL(string: "https://image.tmdb.org/t/p/w500\(path)")
+            gridPosterImage.sd_setImage(with: fullURL)
+        }
     }
 
 }

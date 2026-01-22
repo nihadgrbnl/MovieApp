@@ -12,7 +12,7 @@ import UIKit
 class HomeHeader: UICollectionReusableView {
     @IBOutlet weak var collection: UICollectionView!
     
-    private var movies : [MovieModel] = []
+    private var movies : [Movie] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,7 +34,7 @@ class HomeHeader: UICollectionReusableView {
 
     }
     
-    func configure(movies : [MovieModel]) {
+    func configure(movies : [Movie]) {
         self.movies = movies
         collection.reloadData()
     }

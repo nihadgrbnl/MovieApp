@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class DetailController: UIViewController {
 
@@ -18,13 +19,13 @@ class DetailController: UIViewController {
     @IBOutlet weak var overviewLabel: UILabel!
 //    @IBOutlet weak var directorLabel: UILabel!
     
-    var movie : MovieModel?
+    var movie : Movie?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
-        setUpBookmarkButton()
+//        setUpBookmarkButton()
 
     }
     
@@ -45,18 +46,21 @@ class DetailController: UIViewController {
             releaseDateLabel.text = "\(date)"
         }
         
-        if let runtime = movie.runtime {
-            runtimeLabel.text = "\(runtime) minute"
+//        if let runtime = movie.runtime {
+//            runtimeLabel.text = "\(runtime) minute"
+//        }
+//        
+        
+        
+        if let path = movie.backdropPath {
+            let fullURL = URL(string: "https://image.tmdb.org/t/p/w500\(path)")
+            backdropImage.sd_setImage(with: fullURL)
         }
         
         
-        
-        if let backdropPath = movie.backdropImage {
-            backdropImage.image = UIImage(named: backdropPath)
-        }
-        
-        if let posterPath = movie.posterImage {
-            posterImage.image = UIImage(named: posterPath)
+        if let path = movie.posterPath {
+            let fullURL = URL(string: "https://image.tmdb.org/t/p/w500\(path)")
+            posterImage.sd_setImage(with: fullURL)
         }
         
         posterImage.layer.cornerRadius = 12
@@ -64,33 +68,33 @@ class DetailController: UIViewController {
         backdropImage.contentMode = .scaleAspectFill
     }
     
-    private func setUpBookmarkButton() {
-        updateBookmarkIcon()
-    }
+//    private func setUpBookmarkButton() {
+//        updateBookmarkIcon()
+//    }
     
-    private func updateBookmarkIcon() {
-        guard let movie = movie else { return }
-        let isSaved = CoreDataManager.shared.isMovieSaved(movieID: movie.id ?? "")
-        let iconName = isSaved ? "bookmark.fill" : "bookmark"
-        let bookmarkButton = UIBarButtonItem(
-            image: UIImage(systemName: iconName),
-            style: .plain,
-            target: self,
-            action: #selector(bookmarkTapped)
-        )
-        navigationItem.rightBarButtonItem = bookmarkButton
-    }
+//    private func updateBookmarkIcon() {
+//        guard let movie = movie else { return }
+//        let isSaved = CoreDataManager.shared.isMovieSaved(movieID: movie.id ?? "")
+//        let iconName = isSaved ? "bookmark.fill" : "bookmark"
+//        let bookmarkButton = UIBarButtonItem(
+//            image: UIImage(systemName: "iconName"),
+//            style: .plain,
+//            target: self,
+//            action: #selector(bookmarkTapped)
+//        )
+//        navigationItem.rightBarButtonItem = bookmarkButton
+//    }
     
-    @objc func bookmarkTapped () {
-        guard let movie = movie else { return }
-        if CoreDataManager.shared.isMovieSaved(movieID: movie.id ?? "") {
-            CoreDataManager.shared.deleteMovie(movieID: movie.id ?? "")
-        } else {
-            CoreDataManager.shared.saveMovie(movie: movie)
-        }
-        updateBookmarkIcon()
-        
-        
-    }
+//    @objc func bookmarkTapped () {
+//        guard let movie = movie else { return }
+//        if CoreDataManager.shared.isMovieSaved(movieID: movie.id ?? "") {
+//            CoreDataManager.shared.deleteMovie(movieID: movie.id ?? "")
+//        } else {
+//            CoreDataManager.shared.saveMovie(movie: movie)
+//        }
+//        updateBookmarkIcon()
+//        
+//        
+//    }
     
 }

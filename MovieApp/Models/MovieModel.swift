@@ -7,16 +7,34 @@
 
 import Foundation
 
-struct MovieModel : Codable {
-    let id : String?
-    let title : String?
-    let overview : String?
-    let posterImage : String?
-    let backdropImage : String?
-    let rating : Double?
-    let releaseDate : Int?
-    let genre : [String]?
-    let viewCount : Int?
-    let director : String?
-    let runtime : Int?
+struct MovieResponse: Codable {
+    let results: [Movie]
 }
+
+struct Movie: Codable {
+    let id: Int
+    let title: String?
+    let originalTitle: String?
+    let overview: String?
+    let posterPath: String?
+    let backdropPath: String?
+    let voteAverage: Double
+    let releaseDate: String?
+    
+    // let genre: [String]?
+    // let viewCount: Int?
+    // let director: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case originalTitle = "original_title"
+        case overview
+        case posterPath = "poster_path"
+        case backdropPath = "backdrop_path" // Düzeltildi
+        case voteAverage = "vote_average"   // Düzeltildi
+        case releaseDate = "release_date"
+    }
+}
+
+

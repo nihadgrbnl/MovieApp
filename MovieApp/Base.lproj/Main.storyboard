@@ -460,7 +460,7 @@ Tell your friends what’s good.”</string>
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <connections>
-                        <outlet property="collection" destination="s41-ky-1Yw" id="I3A-7z-pIT"/>
+                        <outlet property="collection" destination="s41-ky-1Yw" id="iVA-je-o28"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="urZ-HW-Pn2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

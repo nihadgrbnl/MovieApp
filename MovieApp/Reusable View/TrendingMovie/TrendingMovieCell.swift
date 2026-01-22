@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class TrendingMovieCell: UICollectionViewCell {
     
@@ -26,8 +27,13 @@ class TrendingMovieCell: UICollectionViewCell {
         self.contentView.bringSubviewToFront(rankLabel)
     }
     
-    func configure(movie: MovieModel, rank: Int) {
-        posterImage.image = UIImage(named: movie.posterImage!)
+    func configure(movie: Movie, rank: Int) {
+        
+        if let path = movie.posterPath{
+            let fullURL = URL(string: "https://image.tmdb.org/t/p/w500\(path)")
+            posterImage.sd_setImage(with: fullURL)
+        }
+//        posterImage.image = UIImage(named: movie.posterImage!)
         
         let strokeTextAttributes: [NSAttributedString.Key : Any] = [
             .strokeColor : UIColor.clear,
