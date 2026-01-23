@@ -10,7 +10,6 @@ import Foundation
 class HomeViewModel {
     private var movies : [Movie] = []
     
-    
     var trendingMovies : [Movie] = []
     var categories : [String] = ["All", "Action", "Comedy", "Drama", "Horror", "Sci-Fi"]
     var gridMovies : [Movie] = []
@@ -36,8 +35,6 @@ class HomeViewModel {
             }
         }
         
-        
-        
         //        var uniqueGenres = Set<String>()
         //        for movie in movies {
         //            if let genres = movie.genre {
@@ -47,8 +44,6 @@ class HomeViewModel {
         //            }
         //        }
         //        self.categories = ["All"] + uniqueGenres.sorted()
-        
-        
         
         self.onDataUpdated?()
     }
@@ -79,7 +74,7 @@ class HomeViewModel {
         }
         return self.gridMovies[0]
     }
-
+    
     
 }
 

@@ -7,8 +7,39 @@
 
 import Foundation
 
-struct MovieResponse: Codable {
-    let results: [Movie]
+
+class BaseResponse: Codable {
+    let success: Bool?
+    let status_code: Int?
+    let status_message: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case success
+        case status_code
+        case status_message
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.success = try container.decodeIfPresent(Bool.self, forKey: .success)
+        self.status_code = try container.decodeIfPresent(Int.self, forKey: .status_code)
+        self.status_message = try container.decodeIfPresent(String.self, forKey: .status_message)
+    }
+}
+
+
+class MovieResponse: BaseResponse {
+    let results: [Movie]?
+    
+    enum CodingKeys: String, CodingKey {
+            case results
+        }
+
+        required init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.results = try container.decodeIfPresent([Movie].self, forKey: .results)
+            try super.init(from: decoder)
+        }
 }
 
 struct Movie: Codable {

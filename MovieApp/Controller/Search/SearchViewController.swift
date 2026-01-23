@@ -11,10 +11,12 @@
 //
 //    @IBOutlet weak var searchBar: UISearchBar!
 //    @IBOutlet weak var collection: UICollectionView!
-//    
 //    @IBOutlet weak var imageCell: UIImageView!
-//    var allMovies: [MovieModel] = []
-//    var filteredMovies: [MovieModel] = []
+//    
+//    
+//    
+//    var allMovies: [Movie] = []
+//    var filteredMovies: [Movie] = []
 //    
 //    override func viewDidLoad() {
 //        super.viewDidLoad()

@@ -22,11 +22,20 @@ class NetworkManager {
             if let error {
                 print(error.localizedDescription)
             } else if let data {
+                
+                
                 do {
                     let result = try JSONDecoder().decode(MovieResponse.self, from: data)
-                    print(result)
-                    completion(.success(result.results))
+                    
+                                        
+                    if(result.success == false) {
+                        print(result.status_message)
+                    } else {
+                        completion(.success(result.results!))
+                    }
+                    
                 } catch {
+                    print(error)
                     completion(.failure(error))
                 }
             }
@@ -37,8 +46,8 @@ class NetworkManager {
         
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         
-        let urlString = "\(baseUrl)/search/movie?api_key=\(apiKey)&query=\(query)"
-        guard let url = URL(string: urlString) else { return }
+        let searchURL = "\(baseUrl)/search/movie?api_key=\(apiKey)&query=\(query)"
+        guard let url = URL(string: searchURL) else { return }
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error {
@@ -46,9 +55,15 @@ class NetworkManager {
             } else if let data {
                 do {
                     let result = try JSONDecoder().decode(MovieResponse.self, from: data)
-                    print(result)
-                    completion(.success(result.results))
+                    
+                    if(result.success != false) {
+                        print(result.status_message)
+                    } else {
+                        completion(.success(result.results!))
+                    }
+                    
                 } catch {
+                    print("dashdkjsahdjksahd")
                     completion(.failure(error))
                 }
             }
