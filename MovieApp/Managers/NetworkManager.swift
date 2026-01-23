@@ -56,14 +56,15 @@ class NetworkManager {
                 do {
                     let result = try JSONDecoder().decode(MovieResponse.self, from: data)
                     
-                    if(result.success != false) {
+                                        
+                    if(result.success == false) {
                         print(result.status_message)
                     } else {
                         completion(.success(result.results!))
                     }
                     
                 } catch {
-                    print("dashdkjsahdjksahd")
+                    print(error)
                     completion(.failure(error))
                 }
             }
