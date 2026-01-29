@@ -475,7 +475,7 @@ Tell your friends what’s good.”</string>
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ou0-jq-rzU" userLabel="BackdropImage">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ou0-jq-rzU" userLabel="BackdropImage">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="yMG-Nx-ZJl"/>

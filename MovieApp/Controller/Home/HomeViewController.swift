@@ -13,58 +13,83 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var collection: UICollectionView!
     
+    private lazy var newDataBtn: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("Yeni Filmler Geldi", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.backgroundColor = .systemBlue
+        btn.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        
+        btn.layer.cornerRadius = 20
+        btn.layer.shadowColor = UIColor.black.cgColor
+        btn.layer.shadowOpacity = 0.3
+        btn.layer.shadowOffset = CGSize(width: 0, height: 2)
+        btn.layer.shadowRadius = 4
+        
+        btn.addTarget(self, action: #selector(didTapNewDataBtn), for: .touchUpInside)
+        
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.alpha = 0
+        btn.transform = CGAffineTransform(translationX: 0, y: -50)
+        return btn
+    }()
+    
     private let viewModel = HomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setUpCollectionView()
-        configureData()
-        viewModel.fetchData()
+            
         configureUI()
+        setUpCollectionView()
+        setUpNewDataBtn()
+        bindViewModel()
+        viewModel.viewDidLoad()
+        DataPersistenceManager.shared.removeDuplicateMovies()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        NetworkManager.shared.startMonitoring{ isConnected in
+            if isConnected {
+                print("🟢 İnternet Bağlantısı Sağlandı!")
+            } else {
+                print("🔴 İnternet Bağlantısı Koptu!")
+            }
+        }
+    }
+    
+    
+    
+// MARK: - Setup & Configuration
+    private func bindViewModel() {
         
+        viewModel.onDataUpdated = { [weak self] in
+            DispatchQueue.main.async {
+                self?.collection.reloadData()
+                self?.hideToast()
+            }
+        }
+        
+        viewModel.onShowUpdateToast = { [weak self] in
+            DispatchQueue.main.async {
+                self?.showToast()
+            }
+        }
+        
+        viewModel.onError = { [weak self] errorMessage in
+            DispatchQueue.main.async {
+                print("Hata: \(errorMessage)")
+            }
+        }
     }
     
     private func configureUI () {
         navigationItem.hidesBackButton = true
         setupLogoutButton()
         title = "Letterboxd"
-
-        navigationItem.largeTitleDisplayMode = .never
-    }
-    
-    private func setupLogoutButton() {
-        let logoutBtn = UIBarButtonItem(
-            image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
-            style: .plain,
-            target: self,
-            action: #selector(logoutTapped)
-        )
-        logoutBtn.tintColor = .orangeLetterboxd
-        navigationItem.rightBarButtonItem = logoutBtn
-    }
-    
-    @objc func logoutTapped() {
-        let alert = UIAlertController(title: "Exit", message: "Are you sure to exit", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Exit", style: .destructive) { _ in
-            UserDefaults.standard.set(false, forKey: "isLoggedIn")
-            self.navigateToLogin()
-        })
-        present(alert, animated: true)
-    }
-    
-    private func navigateToLogin() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
         
-        if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate,
-           let window = sceneDelegate.window {
-            
-            window.rootViewController = loginController
-            
-        }
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     
@@ -79,16 +104,82 @@ class HomeViewController: UIViewController {
         collection.register(UINib(nibName: "MovieGridCell", bundle: nil), forCellWithReuseIdentifier: "MovieGridCell")
     }
     
-    private func configureData() {
-        viewModel.onDataUpdated = { [weak self] in
-            DispatchQueue.main.async {
-                print(" Film count: \(self?.viewModel.gridMovies.count ?? 0)")
-                self?.collection.reloadData()
-            }
-        }
-        viewModel.fetchData()
+    private func setUpNewDataBtn() {
+        view.addSubview(newDataBtn)
+        
+        NSLayoutConstraint.activate([
+            newDataBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            newDataBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            newDataBtn.widthAnchor.constraint(equalToConstant: 180),
+            newDataBtn.heightAnchor.constraint(equalToConstant: 40),
+            
+        ])
     }
     
+    private func setupLogoutButton() {
+        let logoutBtn = UIBarButtonItem(
+            image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
+            style: .plain,
+            target: self,
+            action: #selector(logoutTapped)
+        )
+        logoutBtn.tintColor = .orangeLetterboxd
+        navigationItem.rightBarButtonItem = logoutBtn
+    }
+    // MARK: - Actions
+    @objc func logoutTapped() {
+        let alert = UIAlertController(title: "Exit", message: "Are you sure to exit", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Exit", style: .destructive) { _ in
+            UserDefaults.standard.set(false, forKey: "isLoggedIn")
+            self.navigateToLogin()
+        })
+        present(alert, animated: true)
+    }
+    
+    @objc private func didTapNewDataBtn() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        viewModel.userPressedRefreshBtn()
+        collection.setContentOffset(.zero, animated: true)
+    }
+    
+    
+    
+    // MARK: - Helpers & Animations
+    private func showToast() {
+        guard newDataBtn.alpha == 0  else { return }
+        
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 0.8,
+                       options: .curveEaseInOut) {
+            self.newDataBtn.alpha = 1
+            self.newDataBtn.transform = .identity
+        }
+    }
+    
+    private func hideToast() {
+        UIView.animate(withDuration: 0.3) {
+            self.newDataBtn.alpha = 0
+            self.newDataBtn.transform = CGAffineTransform(translationX: 0, y: -50)
+        }
+    }
+    
+    private func navigateToLogin() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        
+        if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate,
+           let window = sceneDelegate.window {
+            
+            window.rootViewController = loginController
+            
+        }
+    }
+
+// MARK: - CollectionView Layout Logic (Compositional Layout)
     private func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { (sectionIndex, env) -> NSCollectionLayoutSection? in
             
@@ -135,6 +226,7 @@ class HomeViewController: UIViewController {
     
 }
 
+// MARK: - CollectionView Delegate & DataSource
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3

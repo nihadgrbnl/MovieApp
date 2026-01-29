@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		202073192F274CD500839384 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 202073182F274CD500839384 /* Alamofire */; };
 		203678952F0EC6F400A86BCC /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 203678942F0EC6F400A86BCC /* IQKeyboardManagerSwift */; };
 		209B28CD2F20B9F000FA72B5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 209B28CC2F20B9F000FA72B5 /* SDWebImage */; };
 		209B28CF2F20B9F000FA72B5 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 209B28CE2F20B9F000FA72B5 /* SDWebImageMapKit */; };
@@ -17,7 +18,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		206686952F07CB2E005E25AD /* Exceptions for "MovieApp" folder in "MovieApp" target */ = {
+		2019D80F2F28CB2300A7060A /* Exceptions for "MovieApp" folder in "MovieApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -30,7 +31,7 @@
 		206686822F07CB2D005E25AD /* MovieApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				206686952F07CB2E005E25AD /* Exceptions for "MovieApp" folder in "MovieApp" target */,
+				2019D80F2F28CB2300A7060A /* Exceptions for "MovieApp" folder in "MovieApp" target */,
 			);
 			path = MovieApp;
 			sourceTree = "<group>";
@@ -43,6 +44,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				209B28CD2F20B9F000FA72B5 /* SDWebImage in Frameworks */,
+				202073192F274CD500839384 /* Alamofire in Frameworks */,
 				209B28CF2F20B9F000FA72B5 /* SDWebImageMapKit in Frameworks */,
 				203678952F0EC6F400A86BCC /* IQKeyboardManagerSwift in Frameworks */,
 			);
@@ -90,6 +92,7 @@
 				203678942F0EC6F400A86BCC /* IQKeyboardManagerSwift */,
 				209B28CC2F20B9F000FA72B5 /* SDWebImage */,
 				209B28CE2F20B9F000FA72B5 /* SDWebImageMapKit */,
+				202073182F274CD500839384 /* Alamofire */,
 			);
 			productName = MovieApp;
 			productReference = 206686802F07CB2D005E25AD /* MovieApp.app */;
@@ -122,6 +125,7 @@
 			packageReferences = (
 				203678932F0EC6F400A86BCC /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				209B28CB2F20B9F000FA72B5 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				202073172F274CD500839384 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 206686812F07CB2D005E25AD /* Products */;
@@ -359,6 +363,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		202073172F274CD500839384 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.0;
+			};
+		};
 		203678932F0EC6F400A86BCC /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
@@ -378,6 +390,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		202073182F274CD500839384 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 202073172F274CD500839384 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		203678942F0EC6F400A86BCC /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 203678932F0EC6F400A86BCC /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;

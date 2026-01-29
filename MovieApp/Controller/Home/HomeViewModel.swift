@@ -17,35 +17,69 @@ class HomeViewModel {
     var selectedCategoryIndex : Int = 0
     
     var onDataUpdated : (() -> Void)?
+    var onError: ((String) -> Void)?
+    
+    var onShowUpdateToast: (() -> Void)?
+    
+    func viewDidLoad() {
+        loadLocalData()
+        fetchData()
+    }
+    
+    
+    private func loadLocalData() {
+        DataPersistenceManager.shared.fetchingMoviesFromDatabase{ [weak self] result in
+            switch result {
+            case .success(let movieItems):
+                guard !movieItems.isEmpty else { return }
+                print("Local database'den \(movieItems.count) film yuklendi")
+                
+                self?.movies = movieItems.map{ $0.toMovieStruct() }
+                self?.processMovies()
+                self?.onDataUpdated?()
+                
+            case .failure(let error):
+                print("Local data hatasi: \(error.localizedDescription)")
+            }
+        }
+    }
     
     func fetchData() {
         
-        //        self.allMovies = MovieService.shared.fetchMovies()
-        
-        NetworkManager.shared.getTrendingMovies { [weak self] result in
-            switch result{
-            case .success(let moviesFromAPI):
-                self?.movies = moviesFromAPI
-                print("\(moviesFromAPI.count) films came from API")
-                self?.processMovies()
-                self?.onDataUpdated?()
-            case .failure(let error):
-                print(error.localizedDescription)
-                
-            }
+        guard NetworkManager.shared.isConnected else {
+            print("⚠️ İnternet yok, istek atılmadı.")
+            self.onError?("No Internet Connection")
+            return
         }
         
-        //        var uniqueGenres = Set<String>()
-        //        for movie in movies {
-        //            if let genres = movie.genre {
-        //                for genre in genres {
-        //                    uniqueGenres.insert(genre)
-        //                }
-        //            }
-        //        }
-        //        self.categories = ["All"] + uniqueGenres.sorted()
-        
-        self.onDataUpdated?()
+        NetworkManager.shared.getTrendingMovies { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result{
+            case .success(let newMovies):
+                print("\(newMovies.count) films came from API, Database'ye yaziliyor")
+                self.saveToDatabase(movies: newMovies)
+                
+                if !newMovies.isEmpty{
+                    self.onShowUpdateToast?()
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func userPressedRefreshBtn() {
+        print("Kullanici yenileme istedi. Local yeniden yukleniyor.")
+        loadLocalData()
+    }
+    
+    private func saveToDatabase(movies: [Movie]) {
+        for movie in movies {
+            DataPersistenceManager.shared.loadLocalData(model: movie) { _ in
+            }
+        }
     }
     
     private func processMovies() {
@@ -60,9 +94,6 @@ class HomeViewModel {
         if selectedTitle == "All" {
             gridMovies = movies
         } else {
-            //            gridMovies = movies.filter{ movie in
-            //                return movie.genre?.contains(selectedTitle) ?? false
-            
             gridMovies = movies
         }
         onDataUpdated?()
