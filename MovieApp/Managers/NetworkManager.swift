@@ -32,27 +32,27 @@ class NetworkManager {
     }
     
     
-//    func getTrendingMovies (completion: @escaping (Result<[Movie], Error>) -> Void) {
-//        guard let url = URL(string: "\(baseUrl)/trendings/movie/day?api_key=\(apiKey)") else { return }
-//        let request = URLRequest(url: url)
-//        URLSession.shared.dataTask(with: request) { data, _, error in
-//            if let error {
-//                print(error.localizedDescription)
-//            } else if let data {
-//                do {
-//                    let result = try JSONDecoder().decode(MovieResponse.self, from: data)
-//                    if(result.success == false) {
-//                        print(result.statusMessage)
-//                    } else {
-//                        completion(.success(result.results!))
-//                    }
-//                } catch {
-//                    print(error)
-//                    completion(.failure(error))
-//                }
-//            }
-//        }.resume()
-//    }
+    //    func getTrendingMovies (completion: @escaping (Result<[Movie], Error>) -> Void) {
+    //        guard let url = URL(string: "\(baseUrl)/trendings/movie/day?api_key=\(apiKey)") else { return }
+    //        let request = URLRequest(url: url)
+    //        URLSession.shared.dataTask(with: request) { data, _, error in
+    //            if let error {
+    //                print(error.localizedDescription)
+    //            } else if let data {
+    //                do {
+    //                    let result = try JSONDecoder().decode(MovieResponse.self, from: data)
+    //                    if(result.success == false) {
+    //                        print(result.statusMessage)
+    //                    } else {
+    //                        completion(.success(result.results!))
+    //                    }
+    //                } catch {
+    //                    print(error)
+    //                    completion(.failure(error))
+    //                }
+    //            }
+    //        }.resume()
+    //    }
     
     func getTrendingMovies(completion: @escaping (Result<[Movie], Error>)-> Void) {
         let url = "\(baseUrl)/trending/movie/day"
@@ -81,21 +81,56 @@ class NetworkManager {
             }
     }
     
-//    func getUserData() {
-//        AF.request("\(baseURL)/users").responseData { response in
-//            switch response.result {
-//            case .success(let data):
-//                do {
-//                    self.user = try JSONDecoder().decode([User].self, from: data)
-//                    self.completion?()
-//                } catch {
-//                    print(error.localizedDescription)
-//                }
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
+    func getMovieTrailer(movieID: Int, completion: @escaping (Result<[VideoResult], Error>) -> Void) {
+        
+        let url = "\(baseUrl)/movie/\(movieID)/videos"
+        let parameters: [String: Any] = [
+            "api_key" : apiKey,
+            "language": "en-US"
+        ]
+        
+        AF.request(url,
+                   method: .get,
+                   parameters: parameters)
+        .responseData { response in
+            
+            switch response.result {
+            case .success(let data):
+                
+                do {
+                    let videoResponse = try JSONDecoder().decode(VideoResponse.self, from: data)
+                    let youtubeVideos = videoResponse.results.filter { $0.site == "YouTube" }
+                    if youtubeVideos.isEmpty {
+                        let error = NSError(domain: "NetworkManager", code: 404, userInfo: [NSLocalizedDescriptionKey: "YouTube videosu bulunamadı"])
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(youtubeVideos))
+                    }
+                } catch {
+                    print("Decoding video error: \(error.localizedDescription)")
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    //    func getUserData() {
+    //        AF.request("\(baseURL)/users").responseData { response in
+    //            switch response.result {
+    //            case .success(let data):
+    //                do {
+    //                    self.user = try JSONDecoder().decode([User].self, from: data)
+    //                    self.completion?()
+    //                } catch {
+    //                    print(error.localizedDescription)
+    //                }
+    //            case .failure(let error):
+    //                print(error.localizedDescription)
+    //            }
+    //        }
+    //    }
     
     
     func searchMovie(query: String, completion: @escaping (Result<[Movie], Error>) -> Void) {

@@ -22,7 +22,6 @@ class HomeViewModel {
     var onShowUpdateToast: (() -> Void)?
     
     func viewDidLoad() {
-        loadLocalData()
         fetchData()
     }
     
@@ -49,6 +48,7 @@ class HomeViewModel {
         guard NetworkManager.shared.isConnected else {
             print("⚠️ İnternet yok, istek atılmadı.")
             self.onError?("No Internet Connection")
+            loadLocalData()
             return
         }
         
@@ -59,6 +59,9 @@ class HomeViewModel {
             case .success(let newMovies):
                 print("\(newMovies.count) films came from API, Database'ye yaziliyor")
                 self.saveToDatabase(movies: newMovies)
+            
+                
+                loadLocalData()
                 
                 if !newMovies.isEmpty{
                     self.onShowUpdateToast?()

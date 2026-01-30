@@ -97,4 +97,54 @@ extension Movie {
     }
 }
 
+struct VideoResponse: BaseResponse, Sendable {
+    let success: Bool?
+    let statusCode: Int?
+    let statusMessage: String?
+    
+    let id: Int?
+    let results: [VideoResult]
+    
+    enum CodingKeys: String, CodingKey {
+        case success
+        case statusCode = "status_code"
+        case statusMessage = "status_message"
+        case id
+        case results
+    }
+}
+
+
+struct VideoResult: Sendable {
+    let id: String?
+    let iso6391: String?
+    let iso31661: String?
+    let key: String?
+    let name: String?
+    let official: Bool?
+    let publishedAt: String?
+    let site: String?
+    let size: Int?
+    let type: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, key, name, official, site, size, type
+        case iso6391 = "iso_639_1"
+        case iso31661 = "iso_3166_1"
+        case publishedAt = "published_at"
+    }
+    
+    var badgeColor: String {
+        switch type {
+        case "Trailer": return "🔴" // Kırmızı
+        case "Teaser": return "🟡"  // Sarı
+        case "Featurette": return "🔵" // Mavi
+        default: return "Hz"         // Gri
+        }
+    }
+}
+extension VideoResponse: Codable{}
+extension VideoResult: Codable{}
+
+
 

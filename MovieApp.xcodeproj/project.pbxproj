@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2019D88D2F2CBAEE00A7060A /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2019D88C2F2CBAEE00A7060A /* YouTubePlayerKit */; };
 		202073192F274CD500839384 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 202073182F274CD500839384 /* Alamofire */; };
 		203678952F0EC6F400A86BCC /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 203678942F0EC6F400A86BCC /* IQKeyboardManagerSwift */; };
 		209B28CD2F20B9F000FA72B5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 209B28CC2F20B9F000FA72B5 /* SDWebImage */; };
@@ -45,6 +46,7 @@
 			files = (
 				209B28CD2F20B9F000FA72B5 /* SDWebImage in Frameworks */,
 				202073192F274CD500839384 /* Alamofire in Frameworks */,
+				2019D88D2F2CBAEE00A7060A /* YouTubePlayerKit in Frameworks */,
 				209B28CF2F20B9F000FA72B5 /* SDWebImageMapKit in Frameworks */,
 				203678952F0EC6F400A86BCC /* IQKeyboardManagerSwift in Frameworks */,
 			);
@@ -93,6 +95,7 @@
 				209B28CC2F20B9F000FA72B5 /* SDWebImage */,
 				209B28CE2F20B9F000FA72B5 /* SDWebImageMapKit */,
 				202073182F274CD500839384 /* Alamofire */,
+				2019D88C2F2CBAEE00A7060A /* YouTubePlayerKit */,
 			);
 			productName = MovieApp;
 			productReference = 206686802F07CB2D005E25AD /* MovieApp.app */;
@@ -126,6 +129,7 @@
 				203678932F0EC6F400A86BCC /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				209B28CB2F20B9F000FA72B5 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				202073172F274CD500839384 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				2019D88B2F2CBAED00A7060A /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 206686812F07CB2D005E25AD /* Products */;
@@ -363,6 +367,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2019D88B2F2CBAED00A7060A /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.5;
+			};
+		};
 		202073172F274CD500839384 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -390,6 +402,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2019D88C2F2CBAEE00A7060A /* YouTubePlayerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2019D88B2F2CBAED00A7060A /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
+			productName = YouTubePlayerKit;
+		};
 		202073182F274CD500839384 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 202073172F274CD500839384 /* XCRemoteSwiftPackageReference "Alamofire" */;

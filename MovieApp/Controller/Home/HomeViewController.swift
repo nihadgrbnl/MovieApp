@@ -119,7 +119,7 @@ class HomeViewController: UIViewController {
     private func setupLogoutButton() {
         let logoutBtn = UIBarButtonItem(
             image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
-            style: .plain,
+            style: .prominent,
             target: self,
             action: #selector(logoutTapped)
         )
