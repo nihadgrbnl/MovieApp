@@ -434,34 +434,12 @@ Tell your friends what’s good.”</string>
                     <view key="view" contentMode="scaleToFill" id="dOf-go-PhI">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="s41-ky-1Yw">
-                                <rect key="frame" x="0.0" y="118" width="393" height="617"/>
-                                <color key="backgroundColor" name="AppMainBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="j2w-yV-tct">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ovD-Vg-16L"/>
                         <color key="backgroundColor" name="AppMainBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="ovD-Vg-16L" firstAttribute="trailing" secondItem="s41-ky-1Yw" secondAttribute="trailing" id="7Jq-GJ-Zgm"/>
-                            <constraint firstItem="ovD-Vg-16L" firstAttribute="bottom" secondItem="s41-ky-1Yw" secondAttribute="bottom" id="Tsy-I7-G2Y"/>
-                            <constraint firstItem="s41-ky-1Yw" firstAttribute="top" secondItem="ovD-Vg-16L" secondAttribute="top" id="h1a-aX-0mX"/>
-                            <constraint firstItem="s41-ky-1Yw" firstAttribute="leading" secondItem="ovD-Vg-16L" secondAttribute="leading" id="snj-na-HNb"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" image="house" catalog="system" id="7cd-ba-7Ml">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
-                    <connections>
-                        <outlet property="collection" destination="s41-ky-1Yw" id="iVA-je-o28"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="urZ-HW-Pn2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -623,10 +601,10 @@ Tell your friends what’s good.”</string>
             </objects>
             <point key="canvasLocation" x="4501.5267175572517" y="-155.63380281690141"/>
         </scene>
-        <!--Main Tab Bar View Controller-->
+        <!--Tabbar-->
         <scene sceneID="6Jq-Kk-KmO">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabBarViewController" id="Ogj-oO-f99" customClass="MainTabBarViewController" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarViewController" id="Ogj-oO-f99" customClass="Tabbar" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PaO-gD-m2F">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

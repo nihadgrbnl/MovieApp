@@ -58,7 +58,7 @@ class DetailController: UIViewController {
         
         setUpSegmentedControl()
         setUpTrailerTableView()
-        fetchTrailer()
+//        fetchTrailer()
         
     }
     
@@ -194,21 +194,21 @@ class DetailController: UIViewController {
         }
     }
     
-    private func fetchTrailer() {
-        guard let id = movie?.id else { return }
-        
-        NetworkManager.shared.getMovieTrailer(movieID: id) { [weak self] result in
-            switch result {
-            case .success(let videos):
-                self?.videos = videos
-                DispatchQueue.main.async {
-                    self?.trailersTableView.reloadData()
-                }
-            case .failure(let error):
-                print("Trailer Error: \(error.localizedDescription)")
-            }
-        }
-    }
+//    private func fetchTrailer() {
+//        guard let id = movie?.id else { return }
+//        
+//        NetworkManager.shared.getMovieTrailer(movieID: id) { [weak self] result in
+//            switch result {
+//            case .success(let videos):
+//                self?.videos = videos
+//                DispatchQueue.main.async {
+//                    self?.trailersTableView.reloadData()
+//                }
+//            case .failure(let error):
+//                print("Trailer Error: \(error.localizedDescription)")
+//            }
+//        }
+//    }
     
 }
 
