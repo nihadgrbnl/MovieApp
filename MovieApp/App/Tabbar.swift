@@ -29,6 +29,12 @@ class Tabbar: UITabBarController {
                                 tag: 1)
         let searchNavigation = UINavigationController(rootViewController: search)
         
+        let actor = ActorTest()
+        actor.tabBarItem = .init(title: "Actor",
+                                image: UIImage(systemName: "person.fill"),
+                                tag: 2)
+        let actorNavigation = UINavigationController(rootViewController: actor)
+        
 //        let watchList = storyboard?.instantiateViewController(withIdentifier: "\(WatchListViewController.self)") as! WatchListViewController
 //        watchList.tabBarItem = .init(title: "Watchlist",
 //                                image: UIImage(systemName: "bookmark"),
@@ -36,7 +42,7 @@ class Tabbar: UITabBarController {
 //        let watchListNavigation = UINavigationController(rootViewController: watchList)
         
         self.tabBar.backgroundColor = .appMainBackground
-        viewControllers = [homeNavigation, searchNavigation, /*watchListNavigation,*/]
+        viewControllers = [homeNavigation, searchNavigation, actorNavigation /*watchListNavigation,*/]
         
         
     }

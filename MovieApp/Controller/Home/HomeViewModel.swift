@@ -15,7 +15,7 @@ struct HomeModel {
 class HomeViewModel {
     
     var items = [HomeModel]()
-    let manager = NetworkManager()
+    let manager = MovieManager()
     
     var success : (() -> Void)?
     var error: ((String) -> Void)?
@@ -23,64 +23,25 @@ class HomeViewModel {
     var onShowUpdateToast: (() -> Void)?
     
     func getMovies() {
-        getNowPlayingMovies()
-        getPopularMovies()
-        getUpcomingMovies()
-        getTopRatedMovies()
+        fetchMovies(endpoint: .nowPlayinMovies, title: "Now Playing")
+        fetchMovies(endpoint: .popularMovies, title: "Popular Movies")
+        fetchMovies(endpoint: .topRatedMovies, title: "Top Rated")
+        fetchMovies(endpoint: .upcomingMovies, title: "Upcoming")
     }
     
-    private func getNowPlayingMovies() {
-        manager.request(model: NewMovieModel.self,
-                        endpoint: "movie/now_playing") { data, errorMessage in
+    private func fetchMovies(endpoint: MovieEndpoint, title: String) {
+        manager.getMovies(endpoint: endpoint) {  data, errorMessage in
             if let errorMessage {
                 self.error?(errorMessage)
             } else if let data {
-                self.items.append(.init(title: "Now Playing",
+                self.items.append(.init(title: title,
                                         items: data.results ?? []))
                 self.success?()
             }
         }
     }
     
-    private func getPopularMovies() {
-        manager.request(model: NewMovieModel.self,
-                        endpoint: "movie/popular") { data, errorMessage in
-            if let errorMessage {
-                self.error?(errorMessage)
-            } else if let data {
-                self.items.append(.init(title: "Popular",
-                                        items: data.results ?? []))
-                self.success?()
-            }
-        }
-    }
     
-    private func getTopRatedMovies() {
-        manager.request(model: NewMovieModel.self,
-                        endpoint: "movie/top_rated") { data, errorMessage in
-            if let errorMessage {
-                self.error?(errorMessage)
-            } else if let data {
-                self.items.append(.init(title: "Top Rated",
-                                        items: data.results ?? []))
-                self.success?()
-                
-            }
-        }
-    }
-    
-    private func getUpcomingMovies() {
-        manager.request(model: NewMovieModel.self,
-                        endpoint: "movie/upcoming") { data, errorMessage in
-            if let errorMessage {
-                self.error?(errorMessage)
-            } else if let data {
-                self.items.append(.init(title: "Upcoming",
-                                        items: data.results ?? []))
-                self.success?()
-            }
-        }
-    }
     
     
     //    private func loadLocalData() {
@@ -142,22 +103,7 @@ class HomeViewModel {
     //        }
     //    }
     
-    //    private func processMovies() {
-    //        self.trendingMovies = Array(movies.prefix(10))
-    //        self.gridMovies = movies
-    //    }
     
-    //    func selectedCategory(at index : Int) {
-    //        self.selectedCategoryIndex = index
-    //        let selectedTitle = categories[index]
-    //
-    //        if selectedTitle == "All" {
-    //            gridMovies = movies
-    //        } else {
-    //            gridMovies = movies
-    //        }
-    //        onDataUpdated?()
-    //    }
     
     //    func getMovie(at index: Int) -> Movie {
     //        if index < self.gridMovies.count {

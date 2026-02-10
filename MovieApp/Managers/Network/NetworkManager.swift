@@ -48,7 +48,6 @@ class NetworkManager {
                    headers: NetworkHelper.shared.headers).responseData { response in
             switch response.result {
             case .success(let data):
-                print(String(data: data, encoding: .utf8))
                 do {
                     let result = try JSONDecoder().decode(T.self, from: data)
                     print(result)
@@ -64,63 +63,46 @@ class NetworkManager {
     
     
     
-    //    func getMovieTrailer(movieID: Int, completion: @escaping (Result<[VideoResult], Error>) -> Void) {
-    //
-    //        let url = "\(baseUrl)/movie/\(movieID)/videos"
-    //        let parameters: [String: Any] = [
-    //            "api_key" : apiKey,
-    //            "language": "en-US"
-    //        ]
-    //
-    //        AF.request(url,
-    //                   method: .get,
-    //                   parameters: parameters)
-    //        .responseData { response in
-    //
-    //            switch response.result {
-    //            case .success(let data):
-    //
-    //                do {
-    //                    let videoResponse = try JSONDecoder().decode(VideoResponse.self, from: data)
-    //                    let youtubeVideos = videoResponse.results.filter { $0.site == "YouTube" }
-    //                    if youtubeVideos.isEmpty {
-    //                        let error = NSError(domain: "NetworkManager", code: 404, userInfo: [NSLocalizedDescriptionKey: "YouTube videosu bulunamadı"])
-    //                        completion(.failure(error))
-    //                    } else {
-    //                        completion(.success(youtubeVideos))
-    //                    }
-    //                } catch {
-    //                    print("Decoding video error: \(error.localizedDescription)")
-    //                    completion(.failure(error))
-    //                }
-    //            case .failure(let error):
-    //                completion(.failure(error))
-    //            }
-    //        }
-    //    }
+        func getMovieTrailer(movieID: Int, completion: @escaping (Result<[VideoResult], Error>) -> Void) {
     
-    //    func getUserData() {
-    //        AF.request("\(baseURL)/users").responseData { response in
-    //            switch response.result {
-    //            case .success(let data):
-    //                do {
-    //                    self.user = try JSONDecoder().decode([User].self, from: data)
-    //                    self.completion?()
-    //                } catch {
-    //                    print(error.localizedDescription)
-    //                }
-    //            case .failure(let error):
-    //                print(error.localizedDescription)
-    //            }
-    //        }
-    //    }
+            let url = "\(baseUrl)3/movie/\(movieID)/videos"
+            print("🚀 GİDEN URL: \(url)")
+            let parameters: [String: Any] = [
+                "api_key" : apiKey,
+                "language": "en-US"
+            ]
     
+            AF.request(url,
+                       method: .get,
+                       parameters: parameters)
+            .responseData { response in
+    
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let videoResponse = try JSONDecoder().decode(VideoResponse.self, from: data)
+                        let youtubeVideos = (videoResponse.results ?? []).filter { $0.site == "YouTube" }
+                        if youtubeVideos.isEmpty {
+                            let error = NSError(domain: "NetworkManager", code: 404, userInfo: [NSLocalizedDescriptionKey: "YouTube videosu bulunamadı"])
+                            completion(.failure(error))
+                        } else {
+                            completion(.success(youtubeVideos))
+                        }
+                    } catch {
+                        print("Decoding video error: \(error.localizedDescription)")
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
     
     func searchMovie(query: String, completion: @escaping (Result<[Movie], Error>) -> Void) {
         
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         
-        let searchURL = "\(baseUrl)/search/movie?api_key=\(apiKey)&query=\(query)"
+        let searchURL = "\(baseUrl)3/search/movie?api_key=\(apiKey)&query=\(query)"
         guard let url = URL(string: searchURL) else { return }
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, _, error in

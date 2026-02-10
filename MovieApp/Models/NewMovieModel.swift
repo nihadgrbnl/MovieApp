@@ -26,7 +26,7 @@ struct NewMovieModel: Codable {
 //}
 
 // MARK: - Result
-struct NewMovieResult: Codable {
+struct NewMovieResult: Codable, TopImageBottomLabelProtocol {
     let adult: Bool?
     let backdropPath: String?
     let genreIDS: [Int]?
@@ -38,6 +38,13 @@ struct NewMovieResult: Codable {
     let video: Bool?
     let voteAverage: Double?
     let voteCount: Int?
+    
+    var titleText: String {
+        originalTitle ?? ""
+    }
+    var imageName: String {
+        posterPath ?? ""
+    }
 
     enum CodingKeys: String, CodingKey {
         case adult

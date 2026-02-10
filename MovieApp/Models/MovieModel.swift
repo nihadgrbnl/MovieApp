@@ -103,7 +103,7 @@ struct VideoResponse: BaseResponse, Sendable {
     let statusMessage: String?
     
     let id: Int?
-    let results: [VideoResult]
+    let results: [VideoResult]?
     
     enum CodingKeys: String, CodingKey {
         case success

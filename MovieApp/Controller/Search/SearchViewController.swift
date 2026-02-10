@@ -62,21 +62,21 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let selectedMovie = viewModel.getMovie(at: indexPath.item)
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let detailController = storyboard.instantiateViewController(withIdentifier: "DetailController") as? DetailController {
-            detailController.movie = selectedMovie
-            
-            if let navigationController = self.navigationController {
-                navigationController.show(detailController, sender: nil)
-            } else {
-                present(detailController, animated: true)
-            }
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        
+//        let selectedMovie = viewModel.getMovie(at: indexPath.item)
+//        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        if let detailController = storyboard.instantiateViewController(withIdentifier: "DetailController") as? DetailController {
+//            detailController.movie = selectedMovie
+//            
+//            if let navigationController = self.navigationController {
+//                navigationController.show(detailController, sender: nil)
+//            } else {
+//                present(detailController, animated: true)
+//            }
+//        }
+//    }
 }
 
 extension SearchViewController : UISearchBarDelegate {

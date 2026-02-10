@@ -79,10 +79,6 @@ class HomeViewController: BaseController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
-        
-        
-        
-        
     }
     
     override func configureUI() {
@@ -120,6 +116,14 @@ class HomeViewController: BaseController {
         }
     }
     
+    private func navigateToDetail(movie: NewMovieResult) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let detailController = storyboard.instantiateViewController(withIdentifier: "DetailController") as? DetailController {
+            detailController.movie = movie
+            navigationController?.show(detailController, sender: nil)
+        }
+    }
+    
     
     
     
@@ -146,37 +150,7 @@ class HomeViewController: BaseController {
     //        }
     //    }
     //
-    //    private func configureUI () {
-    //        navigationItem.hidesBackButton = true
-    //        setupLogoutButton()
-    //        title = "Letterboxd"
     //
-    //        navigationItem.largeTitleDisplayMode = .never
-    //    }
-    //
-    //
-    //    private func setUpCollectionView() {
-    //        collection.collectionViewLayout = createLayout()
-    //
-    //        collection.delegate = self
-    //        collection.dataSource = self
-    //
-    //        collection.register(UINib(nibName: "TrendingMovieCell", bundle: nil), forCellWithReuseIdentifier: "TrendingMovieCell")
-    //        collection.register(UINib(nibName: "CategoryCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCell")
-    //        collection.register(UINib(nibName: "MovieGridCell", bundle: nil), forCellWithReuseIdentifier: "MovieGridCell")
-    //    }
-    //
-    //    private func setUpNewDataBtn() {
-    //        view.addSubview(newDataBtn)
-    //
-    //        NSLayoutConstraint.activate([
-    //            newDataBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-    //            newDataBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-    //            newDataBtn.widthAnchor.constraint(equalToConstant: 180),
-    //            newDataBtn.heightAnchor.constraint(equalToConstant: 40),
-    //
-    //        ])
-    //    }
     //
     //    private func setupLogoutButton() {
     //        let logoutBtn = UIBarButtonItem(
@@ -299,6 +273,9 @@ extension HomeViewController: CollectionConfiguration {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCell", for: indexPath) as! HomeCell
         cell.configure(data: viewModel.self.items[indexPath.item])
+        cell.onMovieSelected = {[weak self] movie in
+            self?.navigateToDetail(movie: movie)
+        }
         return cell
     }
     
@@ -306,54 +283,8 @@ extension HomeViewController: CollectionConfiguration {
         .init(width: collectionView.frame.width, height: 312)
     }
     
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //        var selectedMovie = viewModel.items[indexPath.item]
-    //        if let movie = selectedMovie {
-    //            print("Selected movie : \(movie.title ?? "Undefined")")
-    //            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //            if let detailController = storyboard.instantiateViewController(withIdentifier: "DetailController") as? DetailController {
-    //                detailController.movie = selectedMovie
-    //                navigationController?.show(detailController, sender: nil)
-    //            }
-    //        }
-    //    }
 }
-//// MARK: - CollectionView Delegate & DataSource
-//extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource {
-//
-//
-//
-//
-//
-//
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//        var selectedMovie : Movie?
-//
-//        if indexPath.section == 0 {
-//            selectedMovie = viewModel.trendingMovies[indexPath.item]
-//        }
-//
-//        if indexPath.section == 1 {
-//            viewModel.selectedCategory(at: indexPath.item)
-//            collectionView.reloadSections([1, 2])
-//            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-//        }
-//
-//        if indexPath.section == 2 {
-//            selectedMovie = viewModel.gridMovies[indexPath.item]
-//        }
-//
-//        if let movie = selectedMovie {
-//            print("Selected movie : \(movie.title ?? "Undefined")")
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            if let detailController = storyboard.instantiateViewController(withIdentifier: "DetailController") as? DetailController {
-//                detailController.movie = movie
-//                navigationController?.show(detailController, sender: nil)
-//            }
-//        }
-//    }
-//}
+
 
 //#Preview {
 //    // Storyboard'dan yüklemezsen ekran simsiyah çıkar, o yüzden ID ile çekiyoruz

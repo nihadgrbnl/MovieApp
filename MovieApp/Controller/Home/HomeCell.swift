@@ -34,6 +34,8 @@ class HomeCell: UICollectionViewCell {
     }()
     
     var items = [NewMovieResult]()
+    
+    var onMovieSelected: ((NewMovieResult) -> Void)?
 
     
     override init(frame: CGRect) {
@@ -80,5 +82,10 @@ extension HomeCell: CollectionConfiguration {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         .init(width: 168, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedMovie = items[indexPath.item]
+        onMovieSelected?(selectedMovie)
     }
 }

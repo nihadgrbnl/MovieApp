@@ -15,8 +15,8 @@ enum EncodingType {
 class NetworkHelper {
     static let shared = NetworkHelper()
     
-    private let version = "3"
     private let baseUrl = "https://api.themoviedb.org/"
+    private let version = "3"
     
     private let imageSize = "w500"
     private let imageBaseURL = "https://image.tmdb.org/t/p/"

@@ -11,11 +11,11 @@ import YouTubePlayerKit
 
 class DetailController: UIViewController {
     
-    var movie : Movie?
+    var movie : NewMovieResult?
     private var videos = [VideoResult]()
     
     private lazy var segmentedControl: UISegmentedControl = {
-        let sc = UISegmentedControl(items: ["Overview", "Trailers"])
+        let sc = UISegmentedControl(items: ["Overview", "Trailers", "Cast"])
         sc.selectedSegmentIndex = 0
         sc.backgroundColor = .appMainBackground
         sc.selectedSegmentTintColor = .orangeLetterboxd
@@ -58,7 +58,7 @@ class DetailController: UIViewController {
         
         setUpSegmentedControl()
         setUpTrailerTableView()
-//        fetchTrailer()
+        fetchTrailer()
         
     }
     
@@ -194,21 +194,21 @@ class DetailController: UIViewController {
         }
     }
     
-//    private func fetchTrailer() {
-//        guard let id = movie?.id else { return }
-//        
-//        NetworkManager.shared.getMovieTrailer(movieID: id) { [weak self] result in
-//            switch result {
-//            case .success(let videos):
-//                self?.videos = videos
-//                DispatchQueue.main.async {
-//                    self?.trailersTableView.reloadData()
-//                }
-//            case .failure(let error):
-//                print("Trailer Error: \(error.localizedDescription)")
-//            }
-//        }
-//    }
+    private func fetchTrailer() {
+        guard let id = movie?.id else { return }
+        
+        NetworkManager.shared.getMovieTrailer(movieID: id) { [weak self] result in
+            switch result {
+            case .success(let videos):
+                self?.videos = videos
+                DispatchQueue.main.async {
+                    self?.trailersTableView.reloadData()
+                }
+            case .failure(let error):
+                print("Trailer Error: \(error.localizedDescription)")
+            }
+        }
+    }
     
 }
 
