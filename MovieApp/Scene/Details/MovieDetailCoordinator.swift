@@ -17,7 +17,7 @@ class MovieDetailCoordinator : Coordinator {
     }
     
     func start() {
-        let controller = MovieDetailController(viewModel: .init(movieID: movieID))
+        let controller = MovieDetailController(viewModel: .init(movieID: movieID, useCase: MovieDetailManager()))
         controller.hidesBottomBarWhenPushed = true
         navigationController.show(controller, sender: nil)
     }
