@@ -15,10 +15,14 @@ struct HomeModel {
 class HomeViewModel {
     
     var items = [HomeModel]()
-    let manager = MovieManager()
+    let useCase : MovieUseCase
     
     var success : (() -> Void)?
     var error: ((String) -> Void)?
+    
+    init(useCase: MovieUseCase) {
+        self.useCase = useCase
+    }
     
     var onShowUpdateToast: (() -> Void)?
     
@@ -30,7 +34,7 @@ class HomeViewModel {
     }
     
     private func fetchMovies(endpoint: MovieEndpoint, title: String) {
-        manager.getMovies(endpoint: endpoint) {  data, errorMessage in
+        useCase.getMovies(endpoint: endpoint) {  data, errorMessage in
             if let errorMessage {
                 self.error?(errorMessage)
             } else if let data {

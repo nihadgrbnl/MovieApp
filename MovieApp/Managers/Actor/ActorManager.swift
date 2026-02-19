@@ -7,12 +7,12 @@
 
 import Foundation
 
-class ActorManager {
+class ActorManager : ActorUseCase{
     private let manager = NetworkManager()
     
-    func getPopularActorDatas(completion: @escaping((Actor?, String?) -> Void)) {
+    func getPopularActorDatas(page: String, completion: @escaping((Actor?, String?) -> Void)) {
         manager.request(model: Actor.self,
-                        endpoint: ActorEndpoint.popularActor.rawValue,
+                        endpoint: ActorEndpoint2.popularActor(page: page).path,
                         completion: completion)
     }
 }

@@ -17,6 +17,16 @@ class HomeCell: UICollectionViewCell {
         return l
     }()
     
+    lazy var seeAllButton : UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("See All", for: .normal)
+        btn.setTitleColor(.orangeLetterboxd, for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+//        btn.addTarget(self, action: #selector(seeAllButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
     lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = .zero
@@ -34,8 +44,9 @@ class HomeCell: UICollectionViewCell {
     }()
     
     var items = [NewMovieResult]()
+    var onMovieSelected: ((Int) -> Void)?
     
-    var onMovieSelected: ((NewMovieResult) -> Void)?
+//    var onSeeAllTapped: ((Int) -> Void)?
 
     
     override init(frame: CGRect) {
@@ -49,10 +60,14 @@ class HomeCell: UICollectionViewCell {
     
     private func configureConstraints() {
         addSubview(titleLabel)
+        addSubview(seeAllButton)
         addSubview(collection)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
+            
+            seeAllButton.topAnchor.constraint(equalTo: topAnchor),
+            seeAllButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -28),
             
             collection.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             collection.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -61,10 +76,17 @@ class HomeCell: UICollectionViewCell {
         ])
     }
     
-    func configure(data: HomeModel) {
+    func configure(data: HomeModel, index: Int) {
         items = data.items
         titleLabel.text = data.title
+        seeAllButton.tag = index
     }
+    
+//    @objc func seeAllButtonTapped(sender: UIButton) {
+//        onSeeAllTapped?(sender.tag)
+//    }
+    
+    
 }
 
 
@@ -85,7 +107,6 @@ extension HomeCell: CollectionConfiguration {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedMovie = items[indexPath.item]
-        onMovieSelected?(selectedMovie)
+        onMovieSelected?(indexPath.item)
     }
 }

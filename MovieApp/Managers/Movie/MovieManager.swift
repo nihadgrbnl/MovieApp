@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieManager {
+class MovieManager: MovieUseCase {
     private let manager = NetworkManager()
     
     func getMovies(endpoint: MovieEndpoint, completion: @escaping((NewMovieModel?, String?) -> Void)) {

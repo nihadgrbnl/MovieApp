@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 import YouTubePlayerKit
 
-class DetailController: UIViewController {
+class DetailControllerOld: UIViewController {
     
     var movie : NewMovieResult?
     private var videos = [VideoResult]()
@@ -62,37 +62,6 @@ class DetailController: UIViewController {
         
     }
     
-    //    private func testTrailers() {
-    //            guard let movieID = movie?.id else {
-    //                print("❌ Hata: Film ID'si bulunamadı!")
-    //                return
-    //            }
-    //
-    //            print("🚀 İstek atılıyor: Movie ID \(movieID) için trailerlar aranıyor...")
-    //
-    //        NetworkManager.shared.getMovieTrailer(movieID: movieID) { [weak self] result in
-    //                switch result {
-    //                case .success(let videos):
-    //                    print("\n✅ BAŞARILI! Toplam \(videos.count) adet video geldi.\n")
-    //                    print("--------------------------------------------------")
-    //
-    //                    for (index, video) in videos.enumerated() {
-    //                        print("🎥 Video #\(index + 1)")
-    //                        print("   📛 İsim: \(video.name ?? "Bilinmiyor")")
-    //                        print("   🏷 Tür : \(video.type ?? "Bilinmiyor")") // Trailer, Teaser vs.
-    //                        print("   🔑 Key : \(video.key ?? "Bilinmiyor")")  // YouTube ID
-    //                        print("   🔗 Site: \(video.site ?? "Bilinmiyor")")
-    //                        print("--------------------------------------------------")
-    //                    }
-    //
-    //                    // Eğer burası çalışıyorsa UI yapmaya hazırız demektir.
-    //
-    //                case .failure(let error):
-    //                    print("\n❌ HATA OLUŞTU:")
-    //                    print("   ⚠️ \(error.localizedDescription)")
-    //                }
-    //            }
-    //        }
     
     private func configureUI() {
         guard let movie = movie else { return }
@@ -212,7 +181,7 @@ class DetailController: UIViewController {
     
 }
 
-extension DetailController: UITableViewDelegate, UITableViewDataSource {
+extension DetailControllerOld: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return videos.count
     }

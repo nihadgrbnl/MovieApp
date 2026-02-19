@@ -50,7 +50,7 @@ class NetworkManager {
             case .success(let data):
                 do {
                     let result = try JSONDecoder().decode(T.self, from: data)
-                    print(result)
+//                    print(result)
                     completion(result, nil)
                 } catch {
                     completion(nil, error.localizedDescription)

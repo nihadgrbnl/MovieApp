@@ -1,15 +1,13 @@
 //
-//  ActorTest.swift
+//  SeeAllController.swift
 //  MovieApp
 //
-//  Created by Nihad Gurbanli on 10.02.26.
+//  Created by Nihad Gurbanli on 14.02.26.
 //
 
 import UIKit
 
-
-
-class ActorTest: BaseController {
+class SeeAllController: BaseController {
     
     lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -26,13 +24,12 @@ class ActorTest: BaseController {
         return collection
     }()
     
-    private let viewModel = ActorViewModel()
+    private let viewModel = SeeAllViewModel()
+    var endpoint : MovieEndpoint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .appMainBackground
-
     }
     
     override func configureConstraints() {
@@ -45,26 +42,20 @@ class ActorTest: BaseController {
         ])
     }
     
-    override func configureViewModel() {
-        viewModel.getActorDatas()
-        viewModel.success = {
-            self.collection.reloadData()
-        }
-        viewModel.error = { message in
-            print(message)
-        }
-    }
+//    override func configureViewModel() {
+//        viewModel.getSeeAllMovies(endpoint: endpoint ?? "", title: title ?? "")
+//    }
 }
 
-extension ActorTest: CollectionConfiguration {
+extension SeeAllController: CollectionConfiguration {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.items.count
+        viewModel.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopImageBottomLabelCell.identifier, for: indexPath) as! TopImageBottomLabelCell
-        cell.configure(data: viewModel.items[indexPath.item])
+        cell.configure(data: viewModel.movies[indexPath.item])
         return cell
     }
     
@@ -72,8 +63,7 @@ extension ActorTest: CollectionConfiguration {
         .init(width: 168, height: 168)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let selectedMovie = viewModel.items[indexPath.item]
-//        onMovieSelected?(selectedMovie)
-//    }
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        viewModel.startPagination(index: indexPath.item)
+    }
 }

@@ -427,28 +427,10 @@ Tell your friends what’s good.”</string>
             </objects>
             <point key="canvasLocation" x="4502" y="520"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="Rfc-SY-ZYo">
-            <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="r7D-mU-ESc" customClass="HomeViewController" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dOf-go-PhI">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="ovD-Vg-16L"/>
-                        <color key="backgroundColor" name="AppMainBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="house" catalog="system" id="7cd-ba-7Ml">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="0.0"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="urZ-HW-Pn2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4502" y="-833"/>
-        </scene>
-        <!--Detail Controller-->
+        <!--Detail Controller Old-->
         <scene sceneID="hDh-yx-ckA">
             <objects>
-                <viewController storyboardIdentifier="DetailController" id="81K-o0-wNI" customClass="DetailController" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailController" id="81K-o0-wNI" customClass="DetailControllerOld" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mwW-B7-RvO">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -613,7 +595,6 @@ Tell your friends what’s good.”</string>
                     <connections>
                         <segue destination="TtY-xI-dHB" kind="relationship" relationship="viewControllers" id="xkM-Ie-UJs"/>
                         <segue destination="HdJ-SR-jaA" kind="relationship" relationship="viewControllers" id="YWm-Ds-9Yj"/>
-                        <segue destination="r7D-mU-ESc" kind="relationship" relationship="viewControllers" id="2hR-sb-ZXx"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGa-qU-VbL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -625,7 +606,6 @@ Tell your friends what’s good.”</string>
         <image name="LogoTest" width="158" height="75"/>
         <image name="OnBoardImage" width="375" height="437"/>
         <image name="bookmark" catalog="system" width="110" height="128"/>
-        <image name="house" catalog="system" width="128" height="104"/>
         <image name="loginTest1" width="1920" height="1080"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="registerBanner" width="1920" height="1080"/>

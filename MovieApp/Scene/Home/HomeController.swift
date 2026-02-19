@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class HomeViewController: BaseController {
+class HomeController: BaseController {
     
     lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -46,7 +46,17 @@ class HomeViewController: BaseController {
         return btn
     }()
     
-    private let viewModel = HomeViewModel()
+    private let viewModel : HomeViewModel
+        
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +90,8 @@ class HomeViewController: BaseController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
     }
+    
+    
     
     override func configureUI() {
         
@@ -116,12 +128,19 @@ class HomeViewController: BaseController {
         }
     }
     
-    private func navigateToDetail(movie: NewMovieResult) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let detailController = storyboard.instantiateViewController(withIdentifier: "DetailController") as? DetailController {
-            detailController.movie = movie
-            navigationController?.show(detailController, sender: nil)
-        }
+//    private func navigateToDetail(movie: NewMovieResult) {
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        if let detailController = storyboard.instantiateViewController(withIdentifier: "DetailController") as? DetailController {
+//            detailController.movie = movie
+//            navigationController?.show(detailController, sender: nil)
+//        }
+//    }
+    
+    func showMovieDetail(section: Int, movieIndex: Int) {
+       let coordinator = MovieDetailCoordinator(navigationController: navigationController ?? UINavigationController(),
+                                                movieID: viewModel.items[section].items[movieIndex].id ?? 0)
+        coordinator.start()
+        
     }
     
     
@@ -264,7 +283,7 @@ class HomeViewController: BaseController {
     //
 }
 
-extension HomeViewController: CollectionConfiguration {
+extension HomeController: CollectionConfiguration {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.items.count
@@ -272,23 +291,27 @@ extension HomeViewController: CollectionConfiguration {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCell", for: indexPath) as! HomeCell
-        cell.configure(data: viewModel.self.items[indexPath.item])
-        cell.onMovieSelected = {[weak self] movie in
-            self?.navigateToDetail(movie: movie)
+        cell.configure(data: viewModel.self.items[indexPath.item], index: indexPath.item)
+        
+        cell.onMovieSelected = { index in
+            self.showMovieDetail(section: indexPath.item, movieIndex: index)
         }
+        
+//        cell.onSeeAllTapped = { sectionIndex in
+//            let controller = SeeAllController()
+//            
+//            let endpoints: [MovieEndpoint] = [.nowPlayinMovies, .popularMovies, .topRatedMovies, .upcomingMovies]
+//            
+//            controller.endpoint = endpoints[sectionIndex]
+//            controller.title = self.viewModel.items[sectionIndex].title
+//            
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         .init(width: collectionView.frame.width, height: 312)
     }
-    
 }
-
-
-//#Preview {
-//    // Storyboard'dan yüklemezsen ekran simsiyah çıkar, o yüzden ID ile çekiyoruz
-//    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//    return storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-//}
-
